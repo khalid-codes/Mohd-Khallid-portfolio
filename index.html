@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohd Khalid &bull; Software Developer | Full-Stack &amp; AI Products</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Mohd Khalid is a Software Developer and Founder of Khalid Builds (B.E. Computer Science, Chitkara University 2021-2025). High-performance web systems and AI product engineering." />
+    <meta name="keywords" content="Mohd Khalid, Software Developer, Full Stack Developer, Chitkara University, Khalid Builds, Next.js, React, OpenCV, Python, Kabir Bazaar, CleanVid, FluxRip, Generative AI" />
+    <meta name="author" content="Mohd Khalid" />
+
+    <!-- Open Graph / Social Cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mohd Khalid &bull; Software Developer" />
+    <meta property="og:description" content="I build websites that move and scale. Production case studies: CleanVid AI, Kabir Bazaar, and FluxRip." />
+    <meta property="og:image" content="./images/khalid_mascot_dithered.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Mohd Khalid &bull; Software Developer" />
+    <meta property="twitter:description" content="I build websites that move and scale. Production case studies: CleanVid AI, Kabir Bazaar, and FluxRip." />
+    <meta property="twitter:image" content="./images/khalid_mascot_dithered.jpg" />
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <!-- Sound Toggle Button (Floating Bottom-Right) -->
+    <button id="btn-sound-toggle" class="sound-toggle-btn" aria-label="Toggle sound effects" title="Audio chime">
+      <svg id="sound-icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+    </button>
+
+    <!-- Floating Stage Progress HUD (Right Side) -->
+    <nav id="stage-hud" class="stage-hud" aria-label="Stages Navigation">
+      <div class="hud-progress-line">
+        <div id="hud-progress-fill" class="hud-progress-fill"></div>
+      </div>
+      <ul class="hud-dots-list">
+        <li><a href="#hero" class="hud-dot active" data-stage="0" aria-label="01 Hero"><span class="hud-dot-pip"></span><span class="hud-label">01 Hero</span></a></li>
+        <li><a href="#bio" class="hud-dot" data-stage="1" aria-label="02 Bio"><span class="hud-dot-pip"></span><span class="hud-label">02 Bio</span></a></li>
+        <li><a href="#experience" class="hud-dot" data-stage="2" aria-label="03 Experience &amp; Edu"><span class="hud-dot-pip"></span><span class="hud-label">03 Experience</span></a></li>
+        <li><a href="#cleanvid" class="hud-dot" data-stage="3" aria-label="04 CleanVid"><span class="hud-dot-pip"></span><span class="hud-label">04 CleanVid</span></a></li>
+        <li><a href="#kabir-bazaar" class="hud-dot" data-stage="4" aria-label="05 Kabir Bazaar"><span class="hud-dot-pip"></span><span class="hud-label">05 Kabir Bazaar</span></a></li>
+        <li><a href="#fluxrip" class="hud-dot" data-stage="5" aria-label="06 FluxRip"><span class="hud-dot-pip"></span><span class="hud-label">06 FluxRip</span></a></li>
+        <li><a href="#selected-works" class="hud-dot" data-stage="6" aria-label="07 Selected Ships"><span class="hud-dot-pip"></span><span class="hud-label">07 Selected</span></a></li>
+        <li><a href="#skills" class="hud-dot" data-stage="7" aria-label="08 Skills"><span class="hud-dot-pip"></span><span class="hud-label">08 Skills</span></a></li>
+        <li><a href="#contact" class="hud-dot" data-stage="8" aria-label="09 Contact"><span class="hud-dot-pip"></span><span class="hud-label">09 Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Stages Container -->
+    <main id="stages-container" class="stages-container">
+
+      <!-- ====================================================================
+           STAGE 1: HERO (Royal Cobalt Blue #2261e9)
+           Exact replica of sebg.ch frame 01
+           ==================================================================== -->
+      <section id="hero" class="stage stage-hero">
+        <div class="stage-grid-overlay"></div>
+
+        <!-- Top Navigation Bar -->
+        <header class="stage-nav">
+          <div class="brand-group">
+            <h1 class="brand-name">Mohd Khalid</h1>
+            <p class="brand-role">Software developer</p>
+          </div>
+
+          <div class="nav-actions">
+            <a href="#contact" class="pill-btn pill-btn-white" id="btn-hero-contact">
+              <span>Get in touch</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+            </a>
+            <button id="btn-nav-resume" class="pill-btn pill-btn-glass" aria-label="Open Resume Dossier">
+              <span>Resume</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Giant Typography Statement (Bottom-Left) -->
+        <div class="hero-statement-wrapper">
+          <h2 class="hero-statement">
+            I build<br />
+            websites that<br />
+            <span id="hero-dynamic-word" class="hero-accent-word" style="color: #c084fc; text-shadow: 0 0 35px rgba(192, 132, 252, 0.45);">think.</span>
+          </h2>
+
+          <a href="#bio" class="hero-scroll-prompt" aria-label="Scroll to explore">
+            <span>Scroll to explore</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </a>
+        </div>
+
+        <!-- Mascot & Speech Bubble (Bottom-Right) -->
+        <div class="stage-mascot-wrapper mascot-bottom-right" id="hero-mascot">
+          <div class="mascot-speech-bubble bubble-left">
+            <p class="bubble-content">Hi, I'm <span class="bubble-bold">Khalid</span>. Scroll down and I'll show you around.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box" id="avatar-hero">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 2: BIO STATEMENT & SWISS CREDENTIALS (Warm Swiss Paper #fbfbf8)
+           Exact replica of sebg.ch frame 02
+           ==================================================================== -->
+      <section id="bio" class="stage stage-bio">
+        <div class="stage-grid-overlay grid-dark"></div>
+
+        <div class="stage-nav">
+          <div class="stage-breadcrumb">01 &bull; Profile &amp; Foundation</div>
+          <a href="#experience" class="pill-btn pill-btn-dark-outline">Next: Studio ↓</a>
+        </div>
+
+        <div class="bio-content-container">
+          <!-- Large Editorial Text on the Right -->
+          <div class="bio-statement-box">
+            <h2 class="bio-editorial-text">
+              Full-stack developer passionate about building <em>fast, responsive web apps</em> and <em>practical AI tools</em> that solve real problems.
+            </h2>
+
+            <div class="bio-metrics-strip bio-skills-grid">
+              <div class="metric-pill skill-pill">
+                <div class="skill-pill-main">
+                  <div class="skill-pill-top">
+                    <span class="skill-kicker">01 &bull; Web</span>
+                    <span class="skill-status-dot"></span>
+                  </div>
+                  <span class="skill-pill-title">Full-Stack Web</span>
+                </div>
+                <span class="skill-pill-stack">Next.js 15 &bull; React &bull; TypeScript</span>
+              </div>
+
+              <div class="metric-pill skill-pill">
+                <div class="skill-pill-main">
+                  <div class="skill-pill-top">
+                    <span class="skill-kicker">02 &bull; Intelligence</span>
+                    <span class="skill-status-dot"></span>
+                  </div>
+                  <span class="skill-pill-title">Applied AI &amp; Vision</span>
+                </div>
+                <span class="skill-pill-stack">OpenCV &bull; Python &bull; LLMs</span>
+              </div>
+
+              <div class="metric-pill skill-pill">
+                <div class="skill-pill-main">
+                  <div class="skill-pill-top">
+                    <span class="skill-kicker">03 &bull; Systems</span>
+                    <span class="skill-status-dot"></span>
+                  </div>
+                  <span class="skill-pill-title">Backend &amp; APIs</span>
+                </div>
+                <span class="skill-pill-stack">FastAPI &bull; Node &bull; PostgreSQL</span>
+              </div>
+
+              <div class="metric-pill skill-pill">
+                <div class="skill-pill-main">
+                  <div class="skill-pill-top">
+                    <span class="skill-kicker">04 &bull; Infra</span>
+                    <span class="skill-status-dot"></span>
+                  </div>
+                  <span class="skill-pill-title">Cloud &amp; DevOps</span>
+                </div>
+                <span class="skill-pill-stack">Cloudflare R2 &bull; Docker &bull; CI/CD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Left -->
+        <div class="stage-mascot-wrapper mascot-bottom-left">
+          <div class="mascot-speech-bubble bubble-right">
+            <p class="bubble-content">Grounded in CS fundamentals (DSA, OOP, DBMS) + Certified in <span class="bubble-bold">Generative AI</span>.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 2: ACADEMIC & STUDIO TRAJECTORY • SWISS EDITORIAL INDEX
+           Minimal Linear Hairline Hierarchy + Subtle Micro-Glide Focus + Mascot Companion
+           ==================================================================== -->
+      <section id="experience" class="stage stage-experience stage-horizontal-timeline" aria-label="Academic & Studio Trajectory">
+        <!-- Sticky Viewport pinned while user scrolls vertically -->
+        <div class="experience-sticky-viewport">
+          <div class="stage-grid-overlay"></div>
+
+        <!-- Stage Header & Navigation Bar (Single Unified Top Command Bar) -->
+        <header class="stage-nav">
+          <div class="stage-breadcrumb">02 &bull; Academic &amp; Studio Trajectory</div>
+          
+          <!-- Shifted Glowing Transit Laser Timeline Rail (Top Center) -->
+          <div class="timeline-laser-track" id="timeline-laser-track" role="tablist" aria-label="Academic & Studio Milestones">
+            <div class="laser-track-bg" aria-hidden="true"></div>
+            <div class="laser-track-fill" id="timeline-laser-fill" aria-hidden="true"></div>
+            <div class="laser-stations">
+              <button class="laser-station step-pill active current" data-station="0" data-step="0" role="tab" aria-selected="true" type="button" title="Navigate to Note 01: 2016–17 (St. Thomas' ICSE)">
+                <span class="station-pulse"></span>
+                <span class="station-label">2016&ndash;17</span>
+              </button>
+              <button class="laser-station step-pill" data-station="1" data-step="1" role="tab" aria-selected="false" type="button" title="Navigate to Note 02: 2018–19 (St. John's Kota Class XII PCM)">
+                <span class="station-pulse"></span>
+                <span class="station-label">2018&ndash;19</span>
+              </button>
+              <button class="laser-station step-pill" data-station="2" data-step="2" role="tab" aria-selected="false" type="button" title="Navigate to Note 03: 2021–25 (Chitkara University B.E. CSE)">
+                <span class="station-pulse"></span>
+                <span class="station-label">2021&ndash;25</span>
+              </button>
+              <button class="laser-station step-pill" data-station="3" data-step="3" role="tab" aria-selected="false" type="button" title="Navigate to Note 04: 2025–Pres (KhalidBuilds Studio)">
+                <span class="station-pulse"></span>
+                <span class="station-label">2025&ndash;Pres</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls: Scroll Prompt + Prev/Next Buttons + Next Stage -->
+          <div class="stage-nav-actions">
+            <div class="scroll-instruction-pill">
+              <span class="scroll-mouse-icon">✦</span>
+              <span id="scroll-prompt-text">Click arrows or dots to navigate</span>
+            </div>
+            <div class="timeline-nav-buttons" role="group" aria-label="Milestone navigation controls">
+              <button class="nav-arrow-btn" id="btn-prev-milestone" type="button" aria-label="Previous Milestone" title="Previous milestone" disabled>←</button>
+              <button class="nav-arrow-btn" id="btn-next-milestone" type="button" aria-label="Next Milestone" title="Next milestone">→</button>
+            </div>
+            <a href="#cleanvid" class="pill-btn pill-btn-white">Next: Projects ↓</a>
+          </div>
+        </header>
+
+        <!-- The Horizontal Cards Window & Conveyor Track -->
+        <div class="horizontal-conveyor-viewport" id="horizontal-conveyor-viewport">
+          <div class="horizontal-cards-track" id="horizontal-cards-track">
+
+            <!-- CARD 01: St. Thomas' School Class X (ICSE 2017) -->
+            <article class="timeline-card card-school active" data-index="0" data-stn="school-10" tabindex="0">
+              <div class="sticky-washi-tape tape-mint" aria-hidden="true"></div>
+              <div class="sticky-dog-ear" aria-hidden="true"></div>
+              <div class="sticky-sticker sticker-gold-star" aria-hidden="true">
+                <span class="star-icon">★</span>
+                <span class="sticker-text">94% APPS</span>
+                <span class="sticker-sub">ICSE 85%</span>
+              </div>
+              <header class="card-header">
+                <div class="card-milestone-tag">
+                  <span class="milestone-badge-dot"></span>
+                  <span>NOTE 01 / 04 &bull; ICSE CLASS X</span>
+                </div>
+                <div class="card-year-badge">2016 &ndash; 2017</div>
+              </header>
+
+              <div class="card-body">
+                <div class="card-title-row">
+                  <div>
+                    <h3 class="card-headline">St. Thomas' School, Khalilabad</h3>
+                    <div class="card-degree-wrap">
+                      <span class="card-degree-pill pill-secondary">ICSE (Class X) &bull; New Delhi Council</span>
+                      <span class="card-verified-badge badge-emerald">85.0% Distinction ★</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-metric-chips">
+                  <span class="metric-chip chip-mint">💻 94% Computer Applications</span>
+                  <span class="metric-chip chip-mint">📐 83% Mathematics</span>
+                  <span class="metric-chip chip-mint">⭐ 85.0% ICSE Best-5 Aggregate</span>
+                  <span class="metric-chip chip-mint">🏆 Grade A SUPW &amp; Community Service</span>
+                </div>
+
+                <p class="card-description">
+                  Graduated from <mark class="marker-highlight highlight-mint">St. Thomas' School with an 85.0% ICSE Distinction</mark>, headlined by an outstanding <mark class="marker-highlight highlight-mint">94% in Computer Applications</mark>. Established early foundational fluency in Java, object-oriented concepts, algorithmic logic, and mathematical problem-solving.
+                </p>
+
+                <div class="card-spec-grid">
+                  <div class="spec-group">
+                    <span class="spec-label">VERIFIED ACADEMIC BEDROCK</span>
+                    <div class="spec-tags">
+                      <span class="spec-pill">💻 Computer Applications (94%)</span>
+                      <span class="spec-pill">☕ Java &amp; OOP Foundations</span>
+                      <span class="spec-pill">📐 Mathematics &amp; Logic (83%)</span>
+                      <span class="spec-pill">⚡ Physical Sciences</span>
+                      <span class="spec-pill">💡 Algorithmic Formulation</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="card-footer">
+                <span class="card-status-text">🌟 Memo: Early Java &amp; Computational Foundation with 94% in Computer Apps</span>
+              </footer>
+            </article>
+
+            <!-- CARD 02: St. John's Class XII (CBSE 2019) -->
+            <article class="timeline-card card-school" data-index="1" data-stn="school-12" tabindex="0">
+              <div class="sticky-washi-tape tape-blue" aria-hidden="true"></div>
+              <div class="sticky-dog-ear" aria-hidden="true"></div>
+              <div class="sticky-stamp stamp-cbse" aria-hidden="true">
+                <div class="stamp-border">
+                  <span class="stamp-title">CBSE VERIFIED</span>
+                  <span class="stamp-sub">KOTA RAJ &bull; 2019</span>
+                </div>
+              </div>
+              <header class="card-header">
+                <div class="card-milestone-tag">
+                  <span class="milestone-badge-dot"></span>
+                  <span>NOTE 02 / 04 &bull; CBSE CLASS XII (PCM)</span>
+                </div>
+                <div class="card-year-badge">2018 &ndash; 2019</div>
+              </header>
+
+              <div class="card-body">
+                <div class="card-title-row">
+                  <div>
+                    <h3 class="card-headline">St. John's Sr. Sec. School, Kota (Raj.)</h3>
+                    <div class="card-degree-wrap">
+                      <span class="card-degree-pill pill-secondary">Class XII &bull; Science Stream (PCM)</span>
+                      <span class="card-verified-badge badge-blue">71.4% First Class &bull; CBSE ★</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-metric-chips">
+                  <span class="metric-chip chip-blue">🏃 85% Physical Education (Grade A2)</span>
+                  <span class="metric-chip chip-blue">🧪 73% Chemistry</span>
+                  <span class="metric-chip chip-blue">📚 73% English Core</span>
+                  <span class="metric-chip chip-blue">📐 Mathematics &amp; Physics (PCM)</span>
+                  <span class="metric-chip chip-blue">🏆 Triple A1 Internal Grades</span>
+                </div>
+
+                <p class="card-description">
+                  Completed Senior Secondary education in the <mark class="marker-highlight highlight-blue">Science Stream (PCM) from St. John's Senior Secondary School, Kota, Rajasthan</mark> under the CBSE Board. Built core mathematical discipline in calculus, linear algebra, chemical systems, and Newtonian physics, cultivating the analytical problem-solving mindset essential for computer science.
+                </p>
+
+                <div class="card-spec-grid">
+                  <div class="spec-group">
+                    <span class="spec-label">ANALYTICAL &amp; SCIENTIFIC BEDROCK</span>
+                    <div class="spec-tags">
+                      <span class="spec-pill">∫ Differential &amp; Integral Calculus</span>
+                      <span class="spec-pill">📊 Linear Algebra &amp; Matrices</span>
+                      <span class="spec-pill">⚙️ Classical Mechanics &amp; Vectors</span>
+                      <span class="spec-pill">🧪 Chemical Kinetics &amp; Thermodynamics</span>
+                      <span class="spec-pill">🏃 Applied Kinematics &amp; Physiology (85%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="card-footer">
+                <span class="card-status-text">📐 Memo: Pre-Engineering Scientific Discipline &amp; Mathematical Foundations</span>
+              </footer>
+            </article>
+
+            <!-- CARD 03: Chitkara University (B.E. CSE 2021-25) -->
+            <article class="timeline-card card-academic" data-index="2" data-stn="chitkara-be" tabindex="0">
+              <div class="sticky-washi-tape tape-purple" aria-hidden="true"></div>
+              <div class="sticky-dog-ear" aria-hidden="true"></div>
+              <div class="sticky-seal seal-degree" aria-hidden="true">
+                <div class="seal-inner">
+                  <span class="seal-icon">🎓</span>
+                  <span class="seal-text">9.11 CGPA</span>
+                  <span class="seal-sub">B.E. CSE</span>
+                </div>
+              </div>
+              <header class="card-header">
+                <div class="card-milestone-tag">
+                  <span class="milestone-badge-dot"></span>
+                  <span>NOTE 03 / 04 &bull; B.E. COMPUTER SCIENCE</span>
+                </div>
+                <div class="card-year-badge">2021 &ndash; 2025</div>
+              </header>
+
+              <div class="card-body">
+                <div class="card-title-row">
+                  <div>
+                    <h3 class="card-headline">Chitkara University (CUIET), Punjab</h3>
+                    <div class="card-degree-wrap">
+                      <span class="card-degree-pill">B.E. Computer Science &amp; Engineering</span>
+                      <span class="card-verified-badge badge-purple">9.11 CGPA Distinction ★</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-metric-chips">
+                  <span class="metric-chip chip-purple">⭐ 9.11 / 10.00 Cumulative CGPA</span>
+                  <span class="metric-chip chip-purple">🎓 B.E. Computer Science &amp; Engineering</span>
+                  <span class="metric-chip chip-purple">🏛️ Chitkara Inst. of Engg. &amp; Tech.</span>
+                  <span class="metric-chip chip-purple">📜 Conferred August 28, 2025</span>
+                  <span class="metric-chip chip-purple">🤖 Certified in Generative AI</span>
+                </div>
+
+                <p class="card-description">
+                  Conferred the Bachelor of Engineering (Computer Science &amp; Engineering) degree with a stellar <mark class="marker-highlight highlight-purple">9.11 CGPA Academic Distinction</mark> from Chitkara University Institute of Engineering and Technology (Punjab). Grounded in advanced data structures, systems architecture, operating system internals, and relational DBMS, coupled with certified mastery in Generative AI.
+                </p>
+
+                <!-- Official Certifications Strip -->
+                <div class="card-cert-strip">
+                  <span class="spec-label">OFFICIAL CERTIFICATIONS:</span>
+                  <div class="cert-pills">
+                    <span class="cert-pill">🤖 Generative AI: Intro &amp; Applications</span>
+                    <span class="cert-pill">🧠 Prompt Engineering Basics</span>
+                    <span class="cert-pill">📜 Software Engineering &amp; Project Mgmt</span>
+                    <span class="cert-pill">🌐 Modern Web Engineering</span>
+                  </div>
+                </div>
+
+                <div class="card-spec-grid">
+                  <div class="spec-group">
+                    <span class="spec-label">CORE ENGINEERING PILLARS</span>
+                    <div class="spec-tags">
+                      <span class="spec-pill">⚡ Data Structures &amp; Algorithms</span>
+                      <span class="spec-pill">🏗️ Systems &amp; OOP Architecture</span>
+                      <span class="spec-pill">🗄️ Relational DBMS &amp; SQL</span>
+                      <span class="spec-pill">💻 Operating Systems &amp; Concurrency</span>
+                      <span class="spec-pill">🌐 Computer Networks (TCP/IP)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="card-footer">
+                <span class="card-status-text">🎓 Memo: Conferred B.E. CSE with 9.11 CGPA Distinction &bull; Systems &amp; AI Focus</span>
+              </footer>
+            </article>
+
+            <!-- CARD 04: Khalid Builds Studio -->
+            <article class="timeline-card card-studio" data-index="3" data-stn="khalid-builds" tabindex="0">
+              <div class="sticky-washi-tape tape-yellow" aria-hidden="true"></div>
+              <div class="sticky-dog-ear" aria-hidden="true"></div>
+              <div class="sticky-stamp stamp-shipped" aria-hidden="true">
+                <div class="stamp-border">
+                  <span class="stamp-title">🚀 PRODUCTION READY</span>
+                  <span class="stamp-sub">10+ SHIPS &bull; 95+ SPEED</span>
+                </div>
+              </div>
+              <header class="card-header">
+                <div class="card-milestone-tag tag-cyan">
+                  <span class="milestone-badge-dot dot-cyan"></span>
+                  <span>NOTE 04 / 04 &bull; KHALIDBUILDS STUDIO</span>
+                </div>
+                <div class="card-year-badge year-cyan">2025 &ndash; PRESENT</div>
+              </header>
+
+              <div class="card-body">
+                <div class="card-title-row">
+                  <div>
+                    <h3 class="card-headline headline-cyan">KhalidBuilds Studio</h3>
+                    <div class="card-degree-wrap">
+                      <span class="card-degree-pill pill-cyan">Founder &bull; Lead Engineer &bull; "We Design &bull; We Build &bull; We Grow"</span>
+                      <span class="card-verified-badge badge-cyan"><span class="pulse-dot"></span> 10+ Commercial Ships ★</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-metric-chips">
+                  <span class="metric-chip chip-gold">⚡ Sub-Second Load Speeds</span>
+                  <span class="metric-chip chip-gold">🏆 95+ PageSpeed Guarantee</span>
+                  <span class="metric-chip chip-gold">🛠️ 100% Custom Code (Zero Bloat)</span>
+                  <span class="metric-chip chip-gold">🚀 10+ Production Deployments</span>
+                  <span class="metric-chip chip-gold">🌐 Next.js 16 &amp; Edge CDN</span>
+                </div>
+
+                <p class="card-description">
+                  Independent digital engineering studio. Hand-coding scalable web applications, e-commerce ecosystems, and bespoke SaaS platforms with <mark class="marker-highlight highlight-yellow">Next.js 16, TypeScript, sub-second load times, and guaranteed 95+ PageSpeed scores</mark>.
+                </p>
+
+                <!-- Live Platform Ships -->
+                <div class="card-spec-group">
+                  <span class="spec-label">COMMERCIAL PLATFORMS (CLICK TO EXPLORE):</span>
+                  <div class="card-ships-grid">
+                    <a href="https://fluxrip.online" target="_blank" rel="noopener noreferrer" class="ship-card-btn" data-ship="fluxrip">
+                      <span class="ship-icon">⚡</span>
+                      <div class="ship-info">
+                        <strong>FluxRip ↗</strong>
+                        <small>Cloud FFmpeg Media Engine</small>
+                      </div>
+                    </a>
+                    <a href="https://kabirbazaar.site" target="_blank" rel="noopener noreferrer" class="ship-card-btn" data-ship="kabir">
+                      <span class="ship-icon">🛍️</span>
+                      <div class="ship-info">
+                        <strong>Kabir Bazaar ↗</strong>
+                        <small>&lt;40ms Supermarket Search</small>
+                      </div>
+                    </a>
+                    <a href="https://cleanvid.site" target="_blank" rel="noopener noreferrer" class="ship-card-btn" data-ship="cleanvid">
+                      <span class="ship-icon">✨</span>
+                      <div class="ship-info">
+                        <strong>CleanVid AI ↗</strong>
+                        <small>OpenCV Watermark Inpaint</small>
+                      </div>
+                    </a>
+                    <a href="https://gharwaala.com" target="_blank" rel="noopener noreferrer" class="ship-card-btn" data-ship="gharwaala">
+                      <span class="ship-icon">🏡</span>
+                      <div class="ship-info">
+                        <strong>Gharwaala ↗</strong>
+                        <small>96+ Lighthouse Interior Hub</small>
+                      </div>
+                    </a>
+                    <a href="https://khalidbuilds.online" target="_blank" rel="noopener noreferrer" class="ship-card-btn" data-ship="studio">
+                      <span class="ship-icon">🌐</span>
+                      <div class="ship-info">
+                        <strong>KhalidBuilds ↗</strong>
+                        <small>Agency Engineering Portal</small>
+                      </div>
+                    </a>
+                    <a href="https://asadhealthcare.com" target="_blank" rel="noopener noreferrer" class="ship-card-btn" data-ship="asad">
+                      <span class="ship-icon">🏥</span>
+                      <div class="ship-info">
+                        <strong>Asad Healthcare ↗</strong>
+                        <small>Global Healthcare &amp; CMS</small>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Production Stack Arsenal -->
+                <div class="card-spec-grid" style="margin-top: 0.35rem;">
+                  <div class="spec-group">
+                    <span class="spec-label">PRODUCTION STACK ARSENAL:</span>
+                    <div class="spec-tags">
+                      <span class="spec-pill">⚛️ Next.js 16 &amp; React</span>
+                      <span class="spec-pill">🔷 TypeScript</span>
+                      <span class="spec-pill">🟢 Node.js &amp; Express</span>
+                      <span class="spec-pill">🐘 PostgreSQL &amp; Supabase</span>
+                      <span class="spec-pill">🐍 Python &amp; OpenCV</span>
+                      <span class="spec-pill">🎨 Tailwind CSS &amp; Motion</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="card-footer">
+                <span class="card-status-text text-cyan">🚀 Memo: "We Design &bull; We Build &bull; We Grow" &bull; 10+ Production Deployments</span>
+              </footer>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Bottom Timeline Scroller Scrub Bar -->
+        <div class="timeline-bottom-bar">
+          <div class="timeline-step-indicator">
+            <span class="active-step-num" id="active-step-num">01</span>
+            <span class="total-steps">/ 04</span>
+            <span class="active-step-title" id="active-step-title">St. John's Senior Secondary School (Class X Matriculation)</span>
+          </div>
+          <div class="timeline-track-scrubber">
+            <div class="track-scrubber-fill" id="track-scrubber-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Vertical Snap Stations for Natural Mobile & PC Vertical Scrolling -->
+      <div class="experience-snap-stations" aria-hidden="true">
+        <div class="experience-snap-station" id="station-school10" data-index="0"></div>
+        <div class="experience-snap-station" id="station-school12" data-index="1"></div>
+        <div class="experience-snap-station" id="station-chitkara" data-index="2"></div>
+        <div class="experience-snap-station" id="station-studio" data-index="3"></div>
+      </div>
+    </section>
+
+      <!-- ====================================================================
+           STAGE 3: FEATURED PROJECT 1 &bull; CLEANVID AI (Dark Indigo / Slate)
+           Device Mockup: macOS Safari Window + Overlapping iPhone 3D Mockup
+           ==================================================================== -->
+      <section id="cleanvid" class="stage stage-project stage-indigo project-layout-left-char">
+        <div class="stage-grid-overlay"></div>
+
+        <div class="stage-nav">
+          <div class="project-header-meta">
+            <h2 class="project-stage-title">CleanVid</h2>
+            <span class="project-tag-pill">AI Video Inpainting &bull; OpenCV &bull; Next.js 15</span>
+          </div>
+
+          <div class="nav-actions">
+            <a href="https://cleanvid.site" target="_blank" rel="noopener noreferrer" class="pill-btn pill-btn-live" title="Visit cleanvid.site live in new tab">
+              <span class="live-beacon-dot"></span>
+              <span>Live site ↗</span>
+            </a>
+            <button class="pill-btn pill-btn-white btn-open-project" data-project="cleanvid">
+              <span>View specs</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            <a href="#kabir-bazaar" class="pill-btn pill-btn-glass">Next ↓</a>
+          </div>
+        </div>
+
+        <!-- Device Presentation Viewport -->
+        <div class="stage-device-showcase">
+          <!-- Safari Browser Window Mockup -->
+          <div class="browser-window-mockup" data-project="cleanvid">
+            <div class="browser-chrome-bar">
+              <div class="browser-traffic-lights">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <a href="https://cleanvid.site" target="_blank" rel="noopener noreferrer" class="browser-address-bar clickable-address-bar" title="Click to visit live cleanvid.site">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span class="address-url">cleanvid.site</span>
+                <span class="address-ext-badge">↗</span>
+              </a>
+              <div class="browser-chrome-dummy"></div>
+            </div>
+            <div class="browser-viewport">
+              <img src="./images/cleanvid.jpg" alt="CleanVid Desktop AI Video Watermark Inpainting UI" class="device-screen-img" />
+            </div>
+          </div>
+
+          <!-- Overlapping Floating iPhone Mockup -->
+          <div class="iphone-mockup-wrapper">
+            <div class="iphone-chassis">
+              <div class="iphone-dynamic-island"></div>
+              <div class="iphone-screen">
+                <img src="./images/cleanvid_mobile.png" alt="CleanVid Mobile AI UI on iPhone" class="iphone-screen-img" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Left with Speech Bubble -->
+        <div class="stage-mascot-wrapper mascot-bottom-left">
+          <div class="mascot-speech-bubble bubble-right">
+            <p class="bubble-content">Engineered an in-browser <span class="bubble-bold">60 FPS canvas brush</span> paired with an OpenCV inpainting backend.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 4: FEATURED PROJECT 2 &bull; KABIR BAZAAR (Warm Amber / Gold #f59e0b)
+           Exact replica of sebg.ch yellow stage
+           ==================================================================== -->
+      <section id="kabir-bazaar" class="stage stage-project stage-amber project-layout-right-char">
+        <div class="stage-grid-overlay grid-dark"></div>
+
+        <div class="stage-nav">
+          <div class="project-header-meta">
+            <h2 class="project-stage-title text-ink">Kabir Bazaar</h2>
+            <span class="project-tag-pill pill-dark">Next.js 15 &bull; PostgreSQL on VPS &bull; 30-Day Referral Engine</span>
+          </div>
+
+          <div class="nav-actions">
+            <a href="https://kabirbazaar.site" target="_blank" rel="noopener noreferrer" class="pill-btn pill-btn-live-amber" title="Visit kabirbazaar.site live in new tab">
+              <span class="live-beacon-dot"></span>
+              <span>Live site ↗</span>
+            </a>
+            <button class="pill-btn pill-btn-ink btn-open-project" data-project="kabir_bazaar">
+              <span>View specs</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            <a href="#fluxrip" class="pill-btn pill-btn-stone">Next ↓</a>
+          </div>
+        </div>
+
+        <!-- Device Presentation Viewport -->
+        <div class="stage-device-showcase">
+          <!-- Safari Browser Window Mockup -->
+          <div class="browser-window-mockup" data-project="kabir_bazaar">
+            <div class="browser-chrome-bar">
+              <div class="browser-traffic-lights">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <a href="https://kabirbazaar.site" target="_blank" rel="noopener noreferrer" class="browser-address-bar clickable-address-bar" title="Click to visit live kabirbazaar.site">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span class="address-url">kabirbazaar.site</span>
+                <span class="address-ext-badge">↗</span>
+              </a>
+              <div class="browser-chrome-dummy"></div>
+            </div>
+            <div class="browser-viewport">
+              <img src="./images/kabir_bazaar.jpg" alt="Kabir Bazaar Desktop E-Commerce Platform" class="device-screen-img" />
+            </div>
+          </div>
+
+          <!-- Overlapping Floating iPhone Mockup -->
+          <div class="iphone-mockup-wrapper">
+            <div class="iphone-chassis">
+              <div class="iphone-dynamic-island"></div>
+              <div class="iphone-screen">
+                <img src="./images/kabir_bazaar_mobile.png" alt="Kabir Bazaar Mobile Grocery Store on iPhone" class="iphone-screen-img" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Left with Speech Bubble -->
+        <div class="stage-mascot-wrapper mascot-bottom-left">
+          <div class="mascot-speech-bubble bubble-right">
+            <p class="bubble-content">Production FMCG grocery store with <span class="bubble-bold">sub-40ms MeiliSearch</span> and Zustand real-time cart.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 5: FEATURED PROJECT 3 &bull; FLUXRIP.ONLINE (Vibrant Crimson / Coral)
+           Device Mockup: Asynchronous Media Streaming Architecture
+           ==================================================================== -->
+      <section id="fluxrip" class="stage stage-project stage-crimson project-layout-left-char">
+        <div class="stage-grid-overlay"></div>
+
+        <div class="stage-nav">
+          <div class="project-header-meta">
+            <h2 class="project-stage-title">FluxRip</h2>
+            <span class="project-tag-pill">4K/1080p MP4 &bull; 320kbps MP3 &bull; Cloudflare Containers &bull; FFmpeg 7</span>
+          </div>
+
+          <div class="nav-actions">
+            <a href="https://fluxrip.online" target="_blank" rel="noopener noreferrer" class="pill-btn pill-btn-live-crimson" title="Visit fluxrip.online live in new tab">
+              <span class="live-beacon-dot"></span>
+              <span>Live site ↗</span>
+            </a>
+            <button class="pill-btn pill-btn-white btn-open-project" data-project="fluxrip">
+              <span>View specs</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            <a href="#selected-works" class="pill-btn pill-btn-glass">Next ↓</a>
+          </div>
+        </div>
+
+        <!-- Device Presentation Viewport -->
+        <div class="stage-device-showcase">
+          <!-- Safari Browser Window Mockup -->
+          <div class="browser-window-mockup" data-project="fluxrip">
+            <div class="browser-chrome-bar">
+              <div class="browser-traffic-lights">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <a href="https://fluxrip.online" target="_blank" rel="noopener noreferrer" class="browser-address-bar clickable-address-bar" title="Click to visit live fluxrip.online">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span class="address-url">fluxrip.online</span>
+                <span class="address-ext-badge">↗</span>
+              </a>
+              <div class="browser-chrome-dummy"></div>
+            </div>
+            <div class="browser-viewport">
+              <img src="./images/fluxrip.jpg" alt="FluxRip Desktop Online Media Downloader & Converter" class="device-screen-img" />
+            </div>
+          </div>
+
+          <!-- Overlapping Floating iPhone Mockup -->
+          <div class="iphone-mockup-wrapper">
+            <div class="iphone-chassis">
+              <div class="iphone-dynamic-island"></div>
+              <div class="iphone-screen">
+                <img src="./images/fluxrip_mobile_clean.png" alt="FluxRip Mobile App Interface on iPhone" class="iphone-screen-img" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Left with Speech Bubble -->
+        <div class="stage-mascot-wrapper mascot-bottom-left">
+          <div class="mascot-speech-bubble bubble-right">
+            <p class="bubble-content">Real-time asynchronous media extraction with <span class="bubble-bold">background FFmpeg streaming</span> and Cloudflare CDN.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 6: SELECTED WORKS &bull; GHARWAALA & KHALIDBUILDS (Deep Forest Teal)
+           ==================================================================== -->
+      <section id="selected-works" class="stage stage-project stage-teal project-layout-right-char">
+        <div class="stage-grid-overlay"></div>
+
+        <div class="stage-nav">
+          <div class="project-header-meta">
+            <h2 class="project-stage-title">Selected Ships</h2>
+            <span class="project-tag-pill">Gharwaala.com &bull; KhalidBuilds.online &bull; Live Deployments</span>
+          </div>
+
+          <div class="nav-actions">
+            <a href="https://gharwaala.com" target="_blank" rel="noopener noreferrer" class="pill-btn pill-btn-live" title="Visit gharwaala.com live">
+              <span class="live-beacon-dot"></span>
+              <span>Gharwaala ↗</span>
+            </a>
+            <a href="https://khalidbuilds.online" target="_blank" rel="noopener noreferrer" class="pill-btn pill-btn-white" style="font-weight:700;" title="Visit khalidbuilds.online live">
+              <span class="live-beacon-dot"></span>
+              <span>Studio ↗</span>
+            </a>
+            <button class="pill-btn pill-btn-glass btn-open-project" data-project="gharwaala">
+              <span>Specs</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            <a href="#skills" class="pill-btn pill-btn-glass">Skills ↓</a>
+          </div>
+        </div>
+
+        <!-- Twin Browser Viewport -->
+        <div class="stage-dual-showcase">
+          <div class="dual-browser-card" data-project="gharwaala">
+            <div class="browser-chrome-bar">
+              <div class="browser-traffic-lights">
+                <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              </div>
+              <a href="https://gharwaala.com" target="_blank" rel="noopener noreferrer" class="browser-address-bar clickable-address-bar" title="Click to visit live gharwaala.com">
+                <span class="address-url">gharwaala.com</span>
+                <span class="address-ext-badge">↗</span>
+              </a>
+            </div>
+            <div class="browser-viewport">
+              <img src="./images/gharwaala.jpg" alt="Gharwaala Interior Architecture Showcase" class="device-screen-img" />
+            </div>
+            <div class="card-caption">
+              <strong>Gharwaala</strong> &bull; Live residential interior &amp; modular kitchen platform. Supabase PostgreSQL, Web3Forms, 96+ Lighthouse score.
+            </div>
+          </div>
+
+          <div class="dual-browser-card" data-project="khalidbuilds">
+            <div class="browser-chrome-bar">
+              <div class="browser-traffic-lights">
+                <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+              </div>
+              <a href="https://khalidbuilds.online" target="_blank" rel="noopener noreferrer" class="browser-address-bar clickable-address-bar" title="Click to visit live khalidbuilds.online">
+                <span class="address-url">khalidbuilds.online</span>
+                <span class="address-ext-badge">↗</span>
+              </a>
+            </div>
+            <div class="browser-viewport">
+              <img src="./images/will_tech.jpg" alt="KhalidBuilds Studio Engineering Platform" class="device-screen-img" />
+            </div>
+            <div class="card-caption">
+              <strong>KhalidBuilds Studio</strong> &bull; Custom web development &amp; SaaS engineering agency. Next.js 15, React 19 &amp; Vercel edge runtime.
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Left -->
+        <div class="stage-mascot-wrapper mascot-bottom-left">
+          <div class="mascot-speech-bubble bubble-right">
+            <p class="bubble-content">Proven commercial shipping: from modular architectural platforms to enterprise cloud systems.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 7: AI & ENGINEERING CAPABILITIES (Warm Swiss Paper #fbfbf8)
+           Clean Swiss Editorial Spread + Certified Generative AI Focus
+           ==================================================================== -->
+      <section id="skills" class="stage stage-skills-light">
+        <div class="stage-grid-overlay grid-dark"></div>
+
+        <div class="stage-nav">
+          <div class="project-header-meta">
+            <span class="stage-breadcrumb text-ink">08 &bull; Technical Core</span>
+            <span class="project-tag-pill pill-dark">AI-Native Software Engineering</span>
+          </div>
+
+          <div class="nav-actions">
+            <button id="btn-skills-resume" class="pill-btn pill-btn-ink">
+              <span>Resume dossier</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            <a href="#contact" class="pill-btn pill-btn-stone">Contact ↓</a>
+          </div>
+        </div>
+
+        <!-- 2-Column Swiss Editorial Layout -->
+        <div class="ai-editorial-stage-body">
+          <!-- Left Column: Vision, Certification, & Degree -->
+          <div class="ai-editorial-left">
+            <h2 class="ai-editorial-title">
+              Engineering software that <em>reasons</em>.
+            </h2>
+            <p class="ai-editorial-desc">
+              Formally certified in <strong>Generative AI &amp; Prompt Engineering</strong> with a Computer Science degree from Chitkara University (2021–2025). I build intelligent software products—orchestrating modern LLMs, semantic retrieval, and agentic workflows into high-performance web applications.
+            </p>
+
+            <div class="ai-cred-list">
+              <div class="ai-cred-item">
+                <span class="ai-cred-dot"></span>
+                <div>
+                  <strong>Certified: Generative AI Introduction &amp; Applications</strong>
+                  <p>Foundation models, transformer architectures &amp; multimodal reasoning</p>
+                </div>
+              </div>
+              <div class="ai-cred-item">
+                <span class="ai-cred-dot"></span>
+                <div>
+                  <strong>Certified: Generative AI Prompt Engineering Basics</strong>
+                  <p>Chain-of-thought, few-shot prompting &amp; structured JSON outputs</p>
+                </div>
+              </div>
+              <div class="ai-cred-item item-degree">
+                <span class="ai-cred-dot dot-purple"></span>
+                <div>
+                  <strong>B.E. Computer Science &bull; Chitkara University</strong>
+                  <p>2021 &ndash; 2025 &bull; DSA, OOP, DBMS, Operating Systems &amp; Networks</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Fluid Clean Clusters (No clunky cards) -->
+          <div class="ai-editorial-right">
+            <!-- Group 1: AI & Intelligent Systems -->
+            <div class="ai-skills-group">
+              <span class="group-kicker kicker-ai">01 / Applied AI &amp; LLM Engineering</span>
+              <div class="ai-tags-cluster">
+                <span class="ai-pill pill-featured">Generative AI</span>
+                <span class="ai-pill pill-featured">Prompt Engineering</span>
+                <span class="ai-pill pill-featured">LLM Orchestration</span>
+                <span class="ai-pill pill-featured">RAG &amp; Vector Search</span>
+                <span class="ai-pill">Autonomous AI Agents</span>
+                <span class="ai-pill">Function &amp; Tool Calling</span>
+                <span class="ai-pill">Multimodal AI Pipelines</span>
+                <span class="ai-pill">Structured Output Validation</span>
+              </div>
+            </div>
+
+            <!-- Group 2: Full-Stack Architecture -->
+            <div class="ai-skills-group">
+              <span class="group-kicker kicker-fe">02 / Full-Stack &amp; Web Systems</span>
+              <div class="ai-tags-cluster">
+                <span class="ai-pill">Next.js 16 (App Router)</span>
+                <span class="ai-pill">React 19</span>
+                <span class="ai-pill">Strict TypeScript</span>
+                <span class="ai-pill">Python (Flask &amp; Microservices)</span>
+                <span class="ai-pill">Node.js &amp; Express</span>
+                <span class="ai-pill">PostgreSQL &amp; Prisma 5</span>
+                <span class="ai-pill">Redis Caching</span>
+                <span class="ai-pill">Zustand Real-Time State</span>
+              </div>
+            </div>
+
+            <!-- Group 3: Core Foundations -->
+            <div class="ai-skills-group">
+              <span class="group-kicker kicker-cs">03 / CS Fundamentals &amp; DevOps</span>
+              <div class="ai-tags-cluster">
+                <span class="ai-pill">Data Structures &amp; Algorithms</span>
+                <span class="ai-pill">OOP &amp; System Architecture</span>
+                <span class="ai-pill">DBMS &amp; ACID Transactions</span>
+                <span class="ai-pill">Docker &amp; Linux CLI</span>
+                <span class="ai-pill">Cloudflare CDN &amp; Edge Workflows</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Right (Clear of text) -->
+        <div class="stage-mascot-wrapper mascot-bottom-right" id="skills-mascot">
+          <div class="mascot-speech-bubble bubble-left">
+            <p class="bubble-content">Certified in <span class="bubble-bold">Generative AI</span> &bull; I build products that reason, not just react.</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           STAGE 8: CONTACT / OUTRO (Deep Charcoal Black #0b0b0c)
+           Exact replica of sebg.ch frame 10
+           ==================================================================== -->
+      <section id="contact" class="stage stage-contact">
+        <div class="stage-grid-overlay"></div>
+
+        <!-- Top breadcrumb -->
+        <header class="stage-nav">
+          <div class="brand-group">
+            <h3 class="brand-name font-light">Mohd Khalid</h3>
+            <p class="brand-role">Software Developer</p>
+          </div>
+          <span class="status-live-pill">
+            <span class="status-pulse-dot"></span>
+            Open for Engineering Opportunities
+          </span>
+        </header>
+
+        <!-- Giant Contact Typography Statement + Social Media Hub -->
+        <div class="contact-main-center">
+          <h2 class="contact-lead-line">Got a project?</h2>
+          <h3 class="contact-sub-line">I'm taking on new work.</h3>
+
+          <div class="contact-email-wrapper">
+            <button id="btn-copy-email" class="contact-email-btn" title="Click to copy email address">
+              <span>mohdk6330@gmail.com</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+            <p class="contact-email-hint">Click to copy direct email</p>
+          </div>
+
+          <!-- Bold Interactive Social Media & Profile Pill Cards -->
+          <div class="contact-socials-section">
+            <span class="contact-socials-kicker">Connect &amp; Social Channels</span>
+            <div class="contact-socials-grid">
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/mohdkhalid17/" target="_blank" rel="noopener noreferrer" class="social-pill-card social-card-linkedin" data-social="linkedin">
+                <span class="social-card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </span>
+                <span class="social-card-meta">
+                  <strong class="social-card-title">LinkedIn <span class="social-card-arrow">↗</span></strong>
+                  <small class="social-card-handle">/in/mohdkhalid17</small>
+                </span>
+              </a>
+
+              <!-- GitHub -->
+              <a href="https://github.com/khalidbuilds4u" target="_blank" rel="noopener noreferrer" class="social-pill-card social-card-github" data-social="github">
+                <span class="social-card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                </span>
+                <span class="social-card-meta">
+                  <strong class="social-card-title">GitHub <span class="social-card-arrow">↗</span></strong>
+                  <small class="social-card-handle">@khalidbuilds4u</small>
+                </span>
+              </a>
+
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/khalidbuilds.online/" target="_blank" rel="noopener noreferrer" class="social-pill-card social-card-instagram" data-social="instagram">
+                <span class="social-card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </span>
+                <span class="social-card-meta">
+                  <strong class="social-card-title">Instagram <span class="social-card-arrow">↗</span></strong>
+                  <small class="social-card-handle">@khalidbuilds.online</small>
+                </span>
+              </a>
+
+              <!-- KhalidBuilds Studio -->
+              <a href="https://khalidbuilds.online" target="_blank" rel="noopener noreferrer" class="social-pill-card social-card-studio" data-social="studio">
+                <span class="social-card-icon">
+                  <span class="studio-live-dot"></span>
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </span>
+                <span class="social-card-meta">
+                  <strong class="social-card-title">KhalidBuilds Studio <span class="social-card-arrow">↗</span></strong>
+                  <small class="social-card-handle">khalidbuilds.online</small>
+                </span>
+              </a>
+
+              <!-- Interactive Resume Dossier -->
+              <button type="button" id="btn-contact-resume" class="social-pill-card social-card-resume" data-social="resume">
+                <span class="social-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                </span>
+                <span class="social-card-meta">
+                  <strong class="social-card-title">Resume Dossier <span class="social-card-arrow">↗</span></strong>
+                  <small class="social-card-handle">B.E. CSE &bull; 9.11 CGPA</small>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mascot on Bottom-Right (Waving & Grab interaction) -->
+        <div class="stage-mascot-wrapper mascot-bottom-right" id="outro-mascot">
+          <div class="mascot-speech-bubble bubble-left">
+            <p class="bubble-content">Thanks for stopping by! <span class="bubble-bold">Click me</span> or do a trick below!</p>
+            <div class="bubble-tail"></div>
+          </div>
+          <div class="mascot-avatar-box clickable-mascot" id="mascot-interactive-avatar" title="Click me to do a spin!">
+            <img src="./images/khalid_mascot_dithered.jpg" alt="Mohd Khalid pixel mascot" class="mascot-img" />
+          </div>
+        </div>
+
+        <!-- Bottom Outro Bar (Shifted left so character never blocks links) -->
+        <footer class="contact-bottom-bar">
+          <div class="bottom-bar-left">
+            <button id="btn-do-trick" class="trick-btn">
+              <span>Do a trick</span>
+              <span class="trick-spark">⚡</span>
+            </button>
+          </div>
+
+          <div class="bottom-bar-links">
+            <a href="https://www.linkedin.com/in/mohdkhalid17/" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <span>LinkedIn</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <a href="https://github.com/khalidbuilds4u" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <span>GitHub</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <a href="https://www.instagram.com/khalidbuilds.online/" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <span>Instagram</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <a href="https://khalidbuilds.online" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <span>Studio</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+            <button id="btn-footer-resume" class="footer-link">
+              <span>Resume</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            <a href="tel:+918756111569" class="footer-link">
+              <span>+91 87561 11569</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </footer>
+      </section>
+
+    </main>
+
+    <!-- ====================================================================
+         RESUME DOSSIER MODAL (Minimalist Swiss Modal)
+         ==================================================================== -->
+    <div id="resume-modal" class="swiss-modal" aria-hidden="true" role="dialog" aria-labelledby="resume-title">
+      <div class="swiss-modal-backdrop" id="resume-backdrop"></div>
+      <div class="swiss-modal-dialog">
+        <header class="modal-header">
+          <div>
+            <span class="modal-kicker">Software Developer Dossier</span>
+            <h3 id="resume-title" class="modal-title">Mohd Khalid</h3>
+            <p class="modal-subtitle">B.E. Computer Science &bull; Founder of Khalid Builds</p>
+          </div>
+          <button id="btn-close-resume" class="modal-close-btn" aria-label="Close modal">&times;</button>
+        </header>
+
+        <div class="modal-scroll-body">
+          <!-- Summary Block -->
+          <div class="dossier-section">
+            <h4 class="dossier-heading">Core Profile</h4>
+            <p class="dossier-para">
+              Software Developer with a B.E. in Computer Science from Chitkara University (2021–2025) and founder of Khalid Builds. Specializing in high-performance full-stack web architectures (Next.js 16, React 19, TypeScript, Node.js) and applied AI engineering (OpenCV computer vision video inpainting, streaming media pipelines, and prompt-engineered LLM workflows).
+            </p>
+          </div>
+
+          <!-- Education & Certifications -->
+          <div class="dossier-section">
+            <h4 class="dossier-heading">Education &amp; Certifications</h4>
+            <div class="dossier-timeline-item">
+              <div class="timeline-title-row">
+                <strong>Chitkara University, Punjab</strong>
+                <span class="timeline-date">2021 &ndash; 2025</span>
+              </div>
+              <p class="timeline-desc">Bachelor of Engineering &bull; Computer Science and Engineering (DSA, OOP, DBMS, OS, Computer Networks)</p>
+            </div>
+            <div class="dossier-timeline-item" style="margin-top: 12px;">
+              <div class="timeline-title-row">
+                <strong>Generative AI Introduction &amp; Applications</strong>
+                <span class="timeline-badge">Certified</span>
+              </div>
+              <p class="timeline-desc">Specialized training in modern Generative AI architectures, prompt engineering, and LLM application design.</p>
+            </div>
+          </div>
+
+          <!-- Technical Strengths -->
+          <div class="dossier-section">
+            <h4 class="dossier-heading">Technical Stack</h4>
+            <div class="dossier-skills-grid">
+              <div class="skill-category-card">
+                <strong>Frontend</strong>
+                <span>Next.js 16, React 19, TypeScript, Vanilla CSS, TailwindCSS, Zustand, HTML5 Canvas</span>
+              </div>
+              <div class="skill-category-card">
+                <strong>Backend &amp; DB</strong>
+                <span>Node.js, Express, Python (Flask), PostgreSQL, Prisma ORM, Redis, Supabase</span>
+              </div>
+              <div class="skill-category-card">
+                <strong>AI &amp; Media</strong>
+                <span>OpenCV (Inpainting, Telea, Navier-Stokes), FFmpeg, Generative AI, Prompt Engineering</span>
+              </div>
+              <div class="skill-category-card">
+                <strong>DevOps &amp; Tools</strong>
+                <span>Docker, Git/GitHub, MeiliSearch, Gunicorn, Cloudflare CDN, Razorpay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="modal-footer">
+          <a href="mailto:mohdk6330@gmail.com" class="pill-btn pill-btn-ink">
+            <span>Contact Khalid</span>
+          </a>
+          <button id="btn-close-resume-footer" class="pill-btn pill-btn-stone">
+            <span>Close</span>
+          </button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         PROJECT ARCHITECTURE DEEP DIVE MODAL
+         ==================================================================== -->
+    <div id="project-modal" class="swiss-modal" aria-hidden="true" role="dialog">
+      <div class="swiss-modal-backdrop" id="project-backdrop"></div>
+      <div class="swiss-modal-dialog">
+        <header class="modal-header">
+          <div>
+            <span class="modal-kicker" id="project-modal-kicker">Case Study</span>
+            <h3 id="project-modal-title" class="modal-title">Project Name</h3>
+            <p id="project-modal-subtitle" class="modal-subtitle">Stack / Domain</p>
+          </div>
+          <button id="btn-close-project" class="modal-close-btn" aria-label="Close modal">&times;</button>
+        </header>
+
+        <div class="modal-scroll-body" id="project-modal-body">
+          <!-- Dynamic Content Injected via JavaScript -->
+        </div>
+
+        <footer class="modal-footer" id="project-modal-footer">
+          <!-- Action Buttons Injected via JavaScript -->
+        </footer>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
