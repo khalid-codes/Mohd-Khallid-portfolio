@@ -642,6 +642,7 @@ const MILESTONES = [
     badge: '📐 MILESTONE 01 / 04',
     title: 'St. Thomas’ School (ICSE Class X Matric)',
     speech: 'Starting with the foundation: Class 10th at <span class="bubble-bold">St. Thomas’ School (ICSE)</span> with <span class="bubble-bold">94% in Computer Applications</span>—early Java &amp; algorithmic logic!',
+    mobileSpeech: '<span class="bubble-bold">St. Thomas’ School (ICSE)</span>: 94% in Computer Apps &amp; 85% Distinction!',
     mascotOffset: 0,
     mascotRot: 1.5,
     lookX: -5.2,
@@ -654,6 +655,7 @@ const MILESTONES = [
     badge: '⚡ MILESTONE 02 / 04',
     title: 'St. John’s Sr. Sec. School, Kota (Class XII PCM)',
     speech: 'Next: Class 12th in the <span class="bubble-bold">Science Stream (PCM)</span> at <span class="bubble-bold">St. John’s Sr. Sec. School, Kota, Rajasthan</span> (CBSE 2019)—solidifying calculus, mechanics, and rigorous analytical problem solving!',
+    mobileSpeech: '<span class="bubble-bold">St. John’s, Kota (Class XII PCM)</span>: Calculus, Physics &amp; analytical discipline!',
     mascotOffset: 0,
     mascotRot: -1.5,
     lookX: -5.0,
@@ -666,6 +668,7 @@ const MILESTONES = [
     badge: '🎓 MILESTONE 03 / 04',
     title: 'Chitkara University (B.E. CSE — 9.11 CGPA)',
     speech: 'Then, my B.E. in Computer Science &amp; Engineering at <span class="bubble-bold">Chitkara University</span> (2021–25), graduating with a stellar <span class="bubble-bold">9.11 CGPA Distinction</span>—mastering DSA, Systems Architecture, OS internals &amp; Certified in <span class="bubble-bold">Generative AI</span>!',
+    mobileSpeech: '<span class="bubble-bold">Chitkara University (B.E. CSE)</span>: 9.11 CGPA Distinction &amp; GenAI Certified!',
     mascotOffset: 0,
     mascotRot: 0,
     lookX: -5.0,
@@ -678,6 +681,7 @@ const MILESTONES = [
     badge: '🚀 MILESTONE 04 / 04',
     title: 'KhalidBuilds Studio (10+ Commercial Ships)',
     speech: 'And my studio: <span class="bubble-bold">KhalidBuilds Studio</span> (2025–Present)! "We Design • We Build • We Grow"—shipping 10+ commercial platforms with 95+ PageSpeed scores, Next.js 16, and sub-second load times! Click any platform to explore!',
+    mobileSpeech: '<span class="bubble-bold">KhalidBuilds Studio</span>: 10+ commercial ships with 95+ PageSpeed! Tap any project!',
     mascotOffset: 0,
     mascotRot: 0,
     lookX: -4.5,
@@ -714,7 +718,7 @@ export function goToMilestone(index) {
   const track = document.getElementById('horizontal-cards-track');
   const cards = document.querySelectorAll('.timeline-card');
 
-  // 1. Horizontal Cards Translation
+  // 1. Horizontal Cards Translation (Both Desktop & Mobile!)
   if (cards.length && track) {
     const targetCard = cards[index];
     if (targetCard) {
@@ -791,7 +795,8 @@ export function goToMilestone(index) {
     guideSetSide('right');
     guideSetOffset(m.mascotOffset, 0, m.mascotRot);
     guideLookAt(m.lookX, m.lookY);
-    guideSpeakDirect(m.speech, m.badge, 3800);
+    const activeSpeech = (typeof window !== 'undefined' && window.innerWidth <= 640 && m.mobileSpeech) ? m.mobileSpeech : m.speech;
+    guideSpeakDirect(activeSpeech, m.badge, 3800);
   }
 }
 
@@ -853,17 +858,16 @@ function initHorizontalTimelineMotion() {
     }
   };
 
-  // 1. Natural Vertical Scroll Forward Scrollytelling
+  // 1. Natural Vertical Scroll Forward Scrollytelling (Both PC & Mobile!)
   // Forward scroll DOWN advances: Note 01 -> Note 02 -> Note 03 -> Note 04 -> CleanVid.
   // Each milestone is strictly bound to its physical scroll station.
   // When the user stops scrolling, it remains completely stationary — ZERO automatic movement!
-  // Upward scroll NEVER reverses milestones (reverse shifting is done via ← and dots).
+  // Upward scroll NEVER reverses milestones (reverse shifting is done via ←, swipe, and dots).
   const updateMilestonePosition = () => {
-    if (isProgrammaticNavigation) return;
-    if (scrollDir === 'up') return; // NEVER reverse milestones on upward scroll!
-
     const expRect = expSection.getBoundingClientRect();
     const windowH = window.innerHeight;
+    if (isProgrammaticNavigation) return;
+    if (scrollDir === 'up') return; // NEVER reverse milestones on upward scroll!
 
     if (expRect.top <= 10 && expRect.bottom >= windowH * 0.4) {
       const scrolled = Math.max(0, -expRect.top);
@@ -878,8 +882,6 @@ function initHorizontalTimelineMotion() {
       }
 
       // ONLY advance when the user has physically scrolled into a deeper station!
-      // Once advanced, station === activeMilestoneIdx, so this will NEVER trigger again
-      // until the user physically scrolls into the next station!
       if (station > activeMilestoneIdx) {
         goToMilestone(station);
         playMilestoneSound(station);
@@ -888,6 +890,9 @@ function initHorizontalTimelineMotion() {
   };
 
   window.addEventListener('scroll', updateMilestonePosition, { passive: true });
+  window.addEventListener('resize', () => {
+    goToMilestone(activeMilestoneIdx);
+  }, { passive: true });
 
   // 2. Stepper Pills Click -> Jump directly to milestone (forward or backward)
   document.querySelectorAll('.step-pill').forEach(pill => {
@@ -985,7 +990,7 @@ function initHorizontalTimelineMotion() {
   });
 
   // 8. Touch Swipe Gesture Support for Mobile & Tablet on Conveyor Viewport
-  const conveyorViewport = document.getElementById('horizontal-conveyor-viewport');
+  const conveyorViewport = expSection.querySelector('.horizontal-conveyor-viewport') || document.getElementById('horizontal-conveyor-viewport');
   if (conveyorViewport) {
     let touchStartX = 0;
     let touchStartY = 0;

@@ -2428,56 +2428,136 @@ img {
     display: none;
   }
 
-  .stage {
-    min-height: 100svh;
-    height: auto;
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
-    padding: 1.25rem 1.25rem 140px;
-    gap: 1.5rem;
-    justify-content: space-between;
-  }
-
   html {
     scroll-snap-type: none;
+  }
+
+  /* Natural Stage Height on Mobile for Content Stages (eliminates empty half-screen voids!) */
+  .stage {
+    min-height: auto;
+    height: auto;
+    overflow: visible;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    padding: 2.25rem 1.25rem 2.75rem;
+    gap: 1.4rem;
+    justify-content: flex-start;
+  }
+
+  /* Hero Stage keeps Full Viewport Height with Bottom Space for Full 3D Character */
+  #hero.stage {
+    min-height: 100svh;
+    padding: 1.25rem 1.25rem 280px;
+    justify-content: flex-start;
+    gap: 1.5rem;
   }
 
   .stage-mascot-wrapper {
     display: none !important;
   }
 
-  .mascot-speech-bubble {
+  /* On Project Stages (CleanVid, Kabir Bazaar, FluxRip), show the Engineering Summary Card inline beneath the devices on mobile */
+  .stage-project:not(#selected-works) .stage-mascot-wrapper {
+    display: block !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    margin-top: 0.25rem !important;
+    z-index: 20 !important;
+  }
+
+  .stage-project .stage-mascot-wrapper .mascot-avatar-box,
+  .stage-project .stage-mascot-wrapper .bubble-tail {
+    display: none !important;
+  }
+
+  .stage-project .stage-mascot-wrapper .mascot-speech-bubble {
+    max-width: 100% !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    transform: none !important;
+    padding: 13px 16px !important;
+    border-radius: 15px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    color: #0f172a !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .stage-project .stage-mascot-wrapper .bubble-content {
+    font-size: 0.92rem !important;
+    line-height: 1.42 !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+  }
+
+  /* Mobile-Native Vertical Reveal Animations (Replaces +-28vw horizontal counter-slide on narrow viewports) */
+  .browser-window-mockup,
+  .project-layout-right-char .browser-window-mockup {
+    width: 100%;
     max-width: 100%;
+    transform: translate3d(0, 22px, 0) scale(0.97);
+  }
+
+  .stage-active .browser-window-mockup,
+  .stage-visible .browser-window-mockup {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .iphone-mockup-wrapper,
+  .project-layout-right-char .iphone-mockup-wrapper {
+    position: relative;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    margin-top: clamp(-74px, -10vw, -48px);
+    align-self: flex-end;
+    margin-right: 8px;
+    margin-left: auto;
+    width: clamp(124px, 31vw, 175px);
+    z-index: 25;
+    transform: translate3d(0, 20px, 0) scale(0.94);
+  }
+
+  .stage-active .iphone-mockup-wrapper,
+  .stage-visible .iphone-mockup-wrapper {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .dual-browser-card {
+    transform: translate3d(0, 20px, 0) scale(0.97);
+  }
+
+  .stage-active .dual-browser-card,
+  .stage-visible .dual-browser-card {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
   .stage-device-showcase {
     flex-direction: column;
     position: relative;
     width: 100%;
-    margin: auto 0;
+    margin: 0;
   }
 
-  .browser-window-mockup {
-    width: 100%;
-    max-width: 100%;
+  /* Scale FluxRip CSS chassis proportionally to match CleanVid & Kabir Bazaar 3D PNGs */
+  #fluxrip .iphone-mockup-wrapper {
+    width: clamp(102px, 25vw, 145px);
   }
 
-  .iphone-mockup-wrapper {
-    position: relative;
-    right: auto;
-    left: auto;
-    bottom: auto;
-    margin-top: clamp(-95px, -12vw, -55px);
-    align-self: flex-end;
-    margin-right: 6px;
-    width: clamp(132px, 31vw, 200px);
-    z-index: 25;
+  #fluxrip .iphone-chassis {
+    border-radius: 22px;
+    padding: 4px;
+    border-width: 2px;
   }
 
-  .project-layout-left-char .iphone-mockup-wrapper {
-    align-self: flex-start;
-    margin-left: 6px;
-    margin-right: 0;
+  #fluxrip .iphone-screen {
+    border-radius: 18px;
   }
 
   .stage-dual-showcase {
@@ -2506,7 +2586,7 @@ img {
 
   .bio-content-container {
     padding-left: 0;
-    margin: auto 0;
+    margin: 0;
   }
 
   .dossier-skills-grid {
@@ -3623,15 +3703,21 @@ img {
   transition: width 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Responsive Rules for Horizontal Timeline */
+/* Responsive Rules for Horizontal Trajectory Timeline (<= 900px — Horizontal Sticky Conveyor Like PC!) */
 @media (max-width: 900px) {
+  .stage-horizontal-timeline {
+    gap: 0 !important;
+  }
+
   .experience-sticky-viewport {
-    padding: 0.75rem 1rem 132px !important;
+    padding: 0.75rem 1rem 0.85rem !important;
+    justify-content: space-between !important;
+    gap: 0.4rem !important;
   }
 
   .experience-sticky-viewport .stage-nav {
     flex-wrap: wrap;
-    gap: 0.45rem;
+    gap: 0.4rem;
   }
 
   .timeline-laser-track {
@@ -3639,7 +3725,7 @@ img {
     width: 100%;
     max-width: 100%;
     height: 36px;
-    margin: 0.2rem 0 0;
+    margin: 0.15rem 0 0;
     padding: 0 6px;
   }
 
@@ -3651,19 +3737,37 @@ img {
     margin-left: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
-    padding: 0.35rem 2px !important;
+    padding: 0.25rem 0 !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    display: flex !important;
+  }
+
+  .horizontal-cards-track {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    width: max-content !important;
   }
 
   .timeline-card {
-    width: calc(100vw - 2.1rem) !important;
-    max-width: calc(100vw - 2.1rem) !important;
-    max-height: calc(100svh - 245px) !important;
+    width: calc(100vw - 2rem) !important;
+    max-width: calc(100vw - 2rem) !important;
+    height: fit-content !important;
+    align-self: center !important;
+    max-height: calc(100svh - 155px) !important;
     overflow-y: auto !important;
-    padding: 1rem 1.15rem !important;
+    padding: 1rem 1.05rem !important;
+    border-radius: 16px !important;
+    justify-content: flex-start !important;
+    gap: 0.45rem !important;
   }
 
   .timeline-bottom-bar {
-    padding-top: 0.25rem;
+    padding-top: 0.3rem;
+    padding-left: 48px !important;
+    padding-right: 60px !important;
     gap: 0.5rem;
   }
 
@@ -3672,12 +3776,12 @@ img {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 52vw;
+    max-width: 44vw;
   }
 }
 
-/* Compact rules for short viewport heights (e.g., laptop with devtools open or small screens) */
-@media (max-height: 720px) {
+/* Compact rules for short desktop/laptop viewport heights (e.g., laptop with devtools open) */
+@media (min-width: 901px) and (max-height: 720px) {
   .experience-sticky-viewport {
     padding: 0.35rem clamp(0.75rem, 2.5vw, 2rem) !important;
   }
@@ -4144,89 +4248,127 @@ img {
   }
 }
 
-/* 2. Tablet Portrait & Mobile (<= 900px) — Non-Blocking Side-by-Side Bottom Companion Dock */
+/* 2. Tablet Portrait & Mobile (<= 900px) — Mobile-First Character & Layout Architecture */
 @media (max-width: 900px) {
-  html,
   body {
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
   }
 
-  /* Compact Horizontal Companion Dock anchored flush to bottom bezel */
-  .live-guide-companion {
+  /* Hide stray floating green indicator circle on mobile/tablet */
+  .guide-live-indicator {
+    display: none !important;
+  }
+
+  /* STAGE 01 (HERO): Full Expressive 3D Waving Character with Speech Bubble ABOVE Head */
+  .live-guide-companion,
+  .live-guide-companion.guide-side-right,
+  .live-guide-companion.guide-side-left {
     bottom: 0;
     left: 0;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 8px;
-    max-width: calc(100vw - 16px);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     z-index: 850;
-  }
-
-  .live-guide-companion.guide-side-right {
-    flex-direction: row;
-    transform: translate3d(calc(100vw - 100% - 8px), 0, 0);
-  }
-
-  .live-guide-companion.guide-side-left {
-    flex-direction: row-reverse;
-    transform: translate3d(8px, 0, 0);
+    transform: translate3d(calc(50vw - 50%), 0, 0) !important;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .live-guide-mascot-box {
-    width: clamp(104px, 20vw, 152px);
-    height: clamp(118px, 18vh, 172px);
+    width: clamp(300px, 76vw, 370px);
+    height: clamp(350px, 43svh, 430px);
     flex-shrink: 0;
-    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.3));
+    transform: translateX(12px);
+    filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.34));
+    transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .live-guide-bubble {
-    max-width: min(350px, calc(100vw - 138px));
-    padding: 9px 14px;
-    border-radius: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.1);
+    max-width: min(315px, 84vw);
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.28s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .bubble-badge {
-    font-size: 9.5px;
-    margin-bottom: 2px;
+    font-size: 10px;
+    margin-bottom: 3px;
   }
 
   .bubble-text {
-    font-size: clamp(0.82rem, 2.2vw, 0.96rem);
-    line-height: 1.3;
+    font-size: 0.96rem;
+    line-height: 1.35;
   }
 
-  /* Horizontal Comic Pointer Tail pointing directly at the docked character */
-  .live-guide-companion.guide-side-right .bubble-pointer {
-    bottom: 18px;
-    right: -8px;
-    left: auto;
-    transform: none;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 8px solid #ffffff;
-    border-right: none;
-  }
-
+  /* Downward Comic Pointer Tail pointing straight to the character's head */
+  .live-guide-companion .bubble-pointer,
+  .live-guide-companion.guide-side-right .bubble-pointer,
   .live-guide-companion.guide-side-left .bubble-pointer {
-    bottom: 18px;
-    left: -8px;
+    bottom: -8px;
+    left: 50%;
     right: auto;
-    transform: none;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-right: 8px solid #ffffff;
-    border-left: none;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #ffffff;
+    border-bottom: none;
   }
 
-  /* Sound Toggle positioned cleanly above the bottom dock */
+  /* STAGES 02–09: Auto-Minimize Character into a Sleek Floating Corner Avatar Badge */
+  .live-guide-companion.guide-mobile-minimized {
+    align-items: flex-end;
+    transform: translate3d(calc(100vw - 100% - 10px), 0, 0) !important;
+  }
+
+  .live-guide-companion.guide-mobile-minimized .live-guide-mascot-box {
+    width: 58px;
+    height: 66px;
+    transform: none;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.32));
+  }
+
+  .live-guide-companion.guide-mobile-minimized .live-guide-bubble {
+    position: absolute;
+    bottom: 72px;
+    right: 2px;
+    width: max-content;
+    max-width: min(260px, calc(100vw - 28px));
+    margin-bottom: 0;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(10px) scale(0.86) !important;
+  }
+
+  /* Tap-to-Peek on Minimized Corner Avatar */
+  .live-guide-companion.guide-mobile-minimized.guide-mobile-bubble-peek .live-guide-bubble {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .live-guide-companion.guide-mobile-minimized .bubble-pointer {
+    left: auto !important;
+    right: 20px !important;
+    transform: none !important;
+  }
+
+  /* Sound Toggle Button anchored cleanly at Bottom-Left on Mobile (never collides with character) */
   .sound-toggle-btn {
-    bottom: 132px;
-    right: 12px;
+    bottom: 14px;
+    left: 14px;
+    right: auto;
     width: 38px;
     height: 38px;
+    z-index: 920;
+  }
+
+  .sound-toggle-btn svg {
+    width: 17px;
+    height: 17px;
   }
 
   /* Selected Works & Dual Showcases */
@@ -4241,31 +4383,43 @@ img {
   }
 
   .contact-bottom-bar {
-    padding-right: 54px;
-    padding-bottom: 10px;
+    padding-right: 0;
+    padding-bottom: 6px;
   }
 }
 
 /* 3. Mobile Phones (<= 640px) */
 @media (max-width: 640px) {
+  /* Content Stages (02–09) hug their content naturally — zero empty half-screen voids */
   .stage {
-    padding: 1rem 0.95rem 126px;
+    min-height: auto;
+    height: auto;
+    padding: 2rem 1rem 2.5rem;
+    gap: 1.25rem;
+    justify-content: flex-start;
+  }
+
+  /* Hero Stage (01) showcases Headline in top half + Large 3D Character in bottom half */
+  #hero.stage {
+    min-height: 100svh;
+    padding: 1rem 1rem clamp(390px, 48svh, 440px);
+    justify-content: flex-start;
     gap: 1.15rem;
   }
 
   /* Stage Header & Navigation Bar */
   .stage-nav {
     flex-wrap: wrap;
-    gap: 0.55rem;
+    gap: 0.5rem;
     align-items: center;
   }
 
   .brand-name {
-    font-size: 1.1rem;
+    font-size: 1.08rem;
   }
 
   .brand-role {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
   }
 
   .project-header-meta {
@@ -4302,41 +4456,41 @@ img {
   }
 
   .nav-actions .pill-btn {
-    padding: 6px 12px;
+    padding: 5.5px 12px;
     font-size: 11.5px;
   }
 
   /* Hero Statement */
   .hero-statement-wrapper {
-    margin-top: auto;
+    margin-top: 1.15rem;
     margin-bottom: auto;
   }
 
   .hero-statement {
-    font-size: clamp(2.85rem, 12.5vw, 4.2rem);
+    font-size: clamp(2.85rem, 12.5vw, 3.9rem);
     line-height: 0.96;
   }
 
   /* Bio Section */
   .bio-editorial-text {
-    font-size: clamp(1.4rem, 5.8vw, 2rem);
+    font-size: clamp(1.38rem, 5.8vw, 1.9rem);
     line-height: 1.28;
   }
 
   .bio-metrics-strip {
-    margin-top: 1.15rem;
+    margin-top: 1.1rem;
     gap: 10px;
   }
 
   .bio-skills-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 10px;
   }
 
   .skill-pill {
-    padding: 11px 12px;
+    padding: 12px 12px;
     min-height: 88px;
-    border-radius: 12px;
+    border-radius: 14px;
   }
 
   .skill-pill-title {
@@ -4348,151 +4502,443 @@ img {
     line-height: 1.35;
   }
 
-  /* Horizontal Timeline Cards (Stage 02) */
+  /* ==========================================================================
+     STAGE 02 (TRAJECTORY) — HORIZONTAL STICKY CONVEYOR ON MOBILE (SAME AS PC!)
+     Vertical scroll or touch-swipe slides horizontally Note 01 -> 02 -> 03 -> 04
+     ========================================================================== */
   .experience-sticky-viewport {
-    padding: 0.65rem 0.75rem 122px !important;
+    padding: 0.65rem 0.8rem 0.75rem !important;
+    justify-content: space-between !important;
+    gap: 0.35rem !important;
+  }
+
+  .experience-sticky-viewport .stage-nav {
+    gap: 0.35rem !important;
   }
 
   .experience-sticky-viewport .stage-breadcrumb {
-    font-size: 11px;
+    font-size: 10.5px !important;
+    letter-spacing: 0.03em !important;
   }
 
-  .timeline-laser-track {
-    height: 34px;
-    padding: 0 4px;
+  .experience-sticky-viewport .nav-actions {
+    width: auto !important;
+    margin-left: auto !important;
+    gap: 5px !important;
   }
 
-  .laser-station {
-    min-width: 40px;
-    padding: 1px 2px;
+  .experience-sticky-viewport .nav-arrow-btn {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 13px !important;
   }
 
-  .station-label {
-    font-size: 8.5px;
-  }
-
-  .timeline-card {
-    width: calc(100vw - 1.5rem) !important;
-    max-width: calc(100vw - 1.5rem) !important;
-    max-height: calc(100svh - 235px) !important;
-    padding: 0.9rem 0.95rem !important;
-    border-radius: 14px !important;
-  }
-
-  /* Scale down decorative stamps on mobile so they never overlap headlines */
-  .sticky-sticker,
-  .sticky-stamp,
-  .sticky-seal {
-    transform: scale(0.68);
-    transform-origin: top right;
-    top: 6px !important;
-    right: 6px !important;
-  }
-
-  .card-headline {
-    font-size: 1.18rem !important;
-    padding-right: 52px;
-  }
-
-  .card-description {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
-  }
-
-  .metric-chip,
-  .spec-pill,
-  .cert-pill {
-    font-size: 10px !important;
-    padding: 3px 7px !important;
-  }
-
-  .studio-ships-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-  }
-
-  .ship-card-btn {
-    padding: 6px 8px !important;
-  }
-
-  .ship-info strong {
+  .experience-sticky-viewport .pill-btn-white {
+    padding: 4.5px 11px !important;
     font-size: 11px !important;
   }
 
-  .ship-info small {
-    font-size: 9.5px !important;
+  .timeline-laser-track {
+    height: 30px !important;
+    padding: 0 5px !important;
+    margin: 0.1rem 0 0 !important;
   }
 
-  /* Project Showcases (CleanVid, Kabir Bazaar, FluxRip) */
+  .laser-track-bg,
+  .laser-track-fill {
+    top: 7px !important;
+  }
+
+  .station-pulse {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .laser-station {
+    min-width: 40px !important;
+    padding: 1px 3px !important;
+    gap: 2px !important;
+  }
+
+  .station-label {
+    font-size: 8.5px !important;
+  }
+
+  .horizontal-conveyor-viewport {
+    padding: 0.2rem 0 !important;
+    align-items: center !important;
+  }
+
+  .timeline-card {
+    width: calc(100vw - 1.6rem) !important;
+    max-width: calc(100vw - 1.6rem) !important;
+    height: fit-content !important;
+    align-self: center !important;
+    max-height: calc(100svh - 140px) !important;
+    padding: 0.85rem 0.9rem !important;
+    border-radius: 16px !important;
+    gap: 0.38rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Hide corner paper decorations on narrow phones so headers have 100% width */
+  .sticky-washi-tape,
+  .sticky-dog-ear,
+  .sticker-gold-star,
+  .stamp-cbse,
+  .seal-degree,
+  .stamp-shipped {
+    display: none !important;
+  }
+
+  .card-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.4rem 0.65rem !important;
+    margin: -0.85rem -0.9rem 0.15rem -0.9rem !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .card-milestone-tag {
+    padding: 2.5px 7px !important;
+    font-size: 8.5px !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+
+  .card-year-badge {
+    padding: 2.5px 7px !important;
+    font-size: 9px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .card-body {
+    gap: 0.35rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .card-headline {
+    font-size: 1.12rem !important;
+    line-height: 1.18 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+  }
+
+  .card-degree-wrap {
+    gap: 4px !important;
+    margin-top: 2px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .card-degree-pill,
+  .card-verified-badge {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+  }
+
+  .card-metric-chips {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 3.5px !important;
+    margin: 1px 0 !important;
+  }
+
+  .metric-chip {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+    line-height: 1.22 !important;
+  }
+
+  .card-description {
+    font-size: 0.78rem !important;
+    line-height: 1.38 !important;
+    margin: 1px 0 !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .card-cert-strip,
+  .card-spec-grid {
+    margin-top: 1px !important;
+    padding-top: 3px !important;
+  }
+
+  .spec-label {
+    font-size: 8.5px !important;
+    margin-bottom: 2px !important;
+    display: block !important;
+  }
+
+  .spec-tags,
+  .cert-pills {
+    gap: 3.5px !important;
+  }
+
+  .spec-pill,
+  .cert-pill {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+  }
+
+  /* On Studio Card 04, hide the bottom stack tags on short mobile viewports so all 6 Live Studio Ships fit prominently! */
+  .card-studio .card-spec-grid {
+    display: none !important;
+  }
+
+  .card-ships-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 5px !important;
+  }
+
+  .ship-card-btn {
+    padding: 5px 7px !important;
+    gap: 5px !important;
+    border-radius: 7px !important;
+  }
+
+  .ship-icon {
+    font-size: 13px !important;
+  }
+
+  .ship-info strong {
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+  }
+
+  .ship-info small {
+    font-size: 8px !important;
+    line-height: 1.12 !important;
+  }
+
+  .card-footer {
+    padding: 0.35rem 0.65rem !important;
+    margin: 0.15rem -0.9rem -0.85rem -0.9rem !important;
+  }
+
+  .card-status-text {
+    font-size: 9px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+  }
+
+  .timeline-bottom-bar {
+    padding-top: 4px !important;
+    padding-left: 48px !important;
+    padding-right: 58px !important;
+    min-height: 22px !important;
+  }
+
+  .active-step-num {
+    font-size: 0.92rem !important;
+  }
+
+  .total-steps {
+    font-size: 0.68rem !important;
+  }
+
+  .active-step-title {
+    font-size: 0.68rem !important;
+    max-width: 44vw !important;
+  }
+
+  /* ==========================================================================
+     PROJECT SHOWCASES (CleanVid, Kabir Bazaar, FluxRip) ON MOBILE
+     ========================================================================== */
   .browser-chrome-bar {
-    height: 30px;
+    height: 28px;
     padding: 0 10px;
   }
 
   .browser-traffic-lights {
-    width: 42px;
+    width: 40px;
     gap: 5px;
   }
 
   .dot {
-    width: 8.5px;
-    height: 8.5px;
+    width: 8px;
+    height: 8px;
   }
 
   .browser-address-bar {
-    padding: 3px 10px;
-    font-size: 10px;
+    padding: 2px 10px;
+    font-size: 9.5px;
   }
 
   .browser-chrome-dummy {
-    width: 24px;
+    width: 20px;
   }
 
-  .iphone-mockup-wrapper {
-    width: clamp(120px, 33vw, 155px);
-    margin-top: -48px;
+  .iphone-mockup-wrapper,
+  .project-layout-right-char .iphone-mockup-wrapper {
+    width: clamp(114px, 30vw, 145px);
+    margin-top: -54px;
   }
 
-  /* Selected Works Dual Cards */
-  .dual-card-caption {
-    padding: 12px 14px;
+  #fluxrip .iphone-mockup-wrapper {
+    width: clamp(94px, 24vw, 120px);
+    margin-top: -54px;
   }
 
-  .caption-title-row h3 {
-    font-size: 1.05rem;
+  /* ==========================================================================
+     SELECTED WORKS DUAL CARDS ON MOBILE
+     ========================================================================== */
+  #selected-works .project-tag-pill {
+    display: none;
   }
 
-  .dual-card-caption p {
-    font-size: 0.8rem;
+  .stage-dual-showcase {
+    gap: 0.75rem;
   }
 
-  /* Skills & AI Arsenal Stage */
-  .ai-stage-headline {
-    font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+  .dual-browser-card .browser-viewport {
+    aspect-ratio: 16 / 8.6;
   }
 
-  .ai-stage-lead {
-    font-size: 0.92rem;
+  .card-caption {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  /* ==========================================================================
+     SKILLS & AI ARSENAL STAGE ON MOBILE (CLEAN BREATHING SWISS BENTO LAYOUT)
+     ========================================================================== */
+  #skills.stage {
+    padding-top: 1.5rem;
+    padding-bottom: 4.5rem;
+    gap: 1rem;
+  }
+
+  #skills .stage-nav {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #skills .project-header-meta {
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  #skills .stage-breadcrumb {
+    font-size: 10.5px;
+    white-space: nowrap;
+  }
+
+  #skills .project-tag-pill {
+    display: none;
+  }
+
+  #skills .nav-actions {
+    width: auto;
+    margin-left: auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  #skills .nav-actions .pill-btn {
+    padding: 5.5px 11px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .ai-editorial-stage-body {
+    gap: 1rem;
+  }
+
+  .ai-editorial-title {
+    font-size: clamp(1.75rem, 7.2vw, 2.15rem);
+    line-height: 1.06;
+    margin-bottom: 8px;
+  }
+
+  .ai-editorial-desc {
+    font-size: 0.84rem;
+    line-height: 1.48;
+    margin-bottom: 0;
+  }
+
+  /* Hide duplicate 3-box credential list on mobile (already showcased in Stage 02 Chitkara card) */
+  .ai-cred-list {
+    display: none !important;
+  }
+
+  /* 3 Clean, Breathing Swiss Bento Cards for Skill Domains */
+  .ai-editorial-right {
+    gap: 11px;
+  }
+
+  .ai-skills-group {
+    background: #ffffff;
+    border: 1px solid rgba(11, 11, 12, 0.08);
+    border-radius: 16px;
+    padding: 13px 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.035);
+    gap: 9px;
+  }
+
+  .ai-skills-group:last-child {
+    border-bottom: 1px solid rgba(11, 11, 12, 0.08);
+    padding-bottom: 13px;
+  }
+
+  .group-kicker {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .ai-tags-cluster {
+    gap: 6px;
+  }
+
+  /* Show top 6 core pills per Bento card on mobile so each card is a clean 2-3 row grid */
+  .ai-tags-cluster .ai-pill:nth-child(n+7) {
+    display: none;
   }
 
   .ai-pill {
-    padding: 6px 11px;
+    padding: 5.5px 11px;
     font-size: 11.5px;
+    border-radius: 999px;
   }
 
-  /* Contact Stage */
+  /* ==========================================================================
+     CONTACT STAGE ON MOBILE
+     ========================================================================== */
   .contact-lead-line {
-    font-size: clamp(2rem, 8.5vw, 2.8rem);
+    font-size: clamp(1.95rem, 8.2vw, 2.5rem);
   }
 
   .contact-sub-line {
-    font-size: clamp(1.25rem, 5.2vw, 1.75rem);
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
+    margin-top: 4px;
+  }
+
+  .contact-email-wrapper {
+    margin-top: 0.9rem;
   }
 
   .contact-email-btn {
-    font-size: clamp(1.15rem, 5.2vw, 1.65rem);
+    font-size: clamp(1.15rem, 5vw, 1.55rem);
     gap: 8px;
     word-break: break-all;
+  }
+
+  .contact-socials-section {
+    margin-top: 1rem;
+    gap: 10px;
   }
 
   .contact-socials-grid {
@@ -4507,19 +4953,24 @@ img {
   }
 
   .social-pill-card {
-    padding: 8px 10px;
+    padding: 9px 11px;
     gap: 8px;
     border-radius: 13px;
   }
 
   .social-card-icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 9px;
   }
 
+  .social-card-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .social-card-title {
-    font-size: 12.5px;
+    font-size: 12px;
   }
 
   .social-card-handle {
@@ -4527,45 +4978,59 @@ img {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 105px;
+    max-width: 112px;
   }
 
   .contact-bottom-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     padding-top: 0.85rem;
+    padding-left: 44px;
+    padding-right: 58px;
   }
 
-  .bottom-bar-links {
-    gap: 12px;
+  .trick-btn {
+    padding: 6px 12px;
+    font-size: 11.5px;
+  }
+
+  .bottom-bar-links .footer-link:not(:last-child) {
+    display: none;
+  }
+
+  .bottom-bar-links .footer-link:last-child {
     font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
   }
 
-  .footer-link {
-    font-size: 12.5px;
-  }
-
-  /* Compact Bottom Companion on Mobile Phones */
+  /* Hero Character Scale on Compact Phones (<= 640px) */
   .live-guide-mascot-box {
-    width: 96px;
-    height: 110px;
+    width: clamp(290px, 78vw, 340px);
+    height: clamp(340px, 42svh, 395px);
   }
 
   .live-guide-bubble {
-    max-width: calc(100vw - 122px);
-    padding: 8px 12px;
-    border-radius: 14px;
-    margin-bottom: 8px;
+    max-width: min(300px, 84vw);
+    padding: 11px 16px;
+    border-radius: 19px;
+    margin-bottom: 10px;
   }
 
   .bubble-badge {
-    font-size: 8.5px;
+    font-size: 10px;
+    margin-bottom: 3px;
   }
 
   .bubble-text {
-    font-size: 0.78rem;
-    line-height: 1.28;
+    font-size: 0.92rem;
+    line-height: 1.34;
   }
 
   /* Modals on Mobile */
@@ -4576,20 +5041,20 @@ img {
   }
 
   .modal-header {
-    padding: 16px 18px;
+    padding: 14px 16px;
   }
 
   .modal-title {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .modal-scroll-body {
-    padding: 16px 18px;
-    gap: 16px;
+    padding: 14px 16px;
+    gap: 14px;
   }
 
   .modal-footer {
-    padding: 12px 18px;
+    padding: 10px 16px;
     justify-content: stretch;
   }
 
@@ -4602,10 +5067,6 @@ img {
 
 /* 4. Extra-Compact Phones (<= 355px) */
 @media (max-width: 355px) {
-  .studio-ships-grid {
-    grid-template-columns: 1fr !important;
-  }
-
   .contact-socials-grid {
     grid-template-columns: 1fr;
   }
@@ -4614,6 +5075,7 @@ img {
     max-width: 200px;
   }
 }
+
 
 
 

@@ -210,17 +210,35 @@ class LiveGuideCompanion {
         this.doBackflipTrick();
       });
     }
+
+    window.addEventListener('resize', () => {
+      this.syncMobileCompactState(this.currentStageIdx);
+    }, { passive: true });
+  }
+
+  syncMobileCompactState(stageIdx) {
+    if (!this.container) return;
+    const isMobile = window.innerWidth <= 900;
+    if (isMobile && stageIdx > 0) {
+      this.container.classList.add('guide-mobile-minimized');
+    } else {
+      this.container.classList.remove('guide-mobile-minimized', 'guide-mobile-bubble-peek');
+    }
   }
 
   updateForStage(stageIdx, triggerSound = true) {
     if (stageIdx < 0 || stageIdx >= STAGE_SCRIPTS.length) return;
     const script = STAGE_SCRIPTS[stageIdx];
-    const targetSide = script.side;
+    const isMobile = window.innerWidth <= 900;
+    // On mobile, keep the minimized badge anchored on the right so it never jumps across content
+    const targetSide = (isMobile && stageIdx > 0) ? 'right' : script.side;
     const currentSide = this.container ? (this.container.classList.contains('guide-side-left') ? 'left' : 'right') : this.currentSide;
 
     const isInitialLoad = !this.hasInitialized;
     const isChangingSides = !isInitialLoad && currentSide !== targetSide;
     const direction = stageIdx >= this.currentStageIdx ? 'down' : 'up';
+
+    this.syncMobileCompactState(stageIdx);
 
     if (this.currentStageIdx === stageIdx && currentSide === targetSide && this.hasInitialized) return;
     this.hasInitialized = true;
@@ -372,7 +390,6 @@ class LiveGuideCompanion {
     if (!this.isDragging) return;
     this.isDragging = false;
     this.container.classList.remove('is-dragging');
-    this.container.style.transform = 'scale(1) rotate(0deg)';
 
     if (this.bubbleEl) {
       this.bubbleEl.style.opacity = '1';
@@ -381,13 +398,15 @@ class LiveGuideCompanion {
 
     // If movement was negligible, treat as a direct CLICK -> Trigger Trick!
     if (!this.hasMoved) {
+      this.container.style.transform = '';
       this.doBackflipTrick();
     } else {
-      // Auto-snap back to stage anchor after 6 seconds of idle
+      this.container.style.transform = 'scale(1) rotate(0deg)';
+      // Auto-snap back to stage anchor after 4 seconds of idle
       clearTimeout(this.idleResetTimer);
       this.idleResetTimer = setTimeout(() => {
         this.resetDragPosition();
-      }, 6000);
+      }, 4000);
     }
   }
 
@@ -440,6 +459,14 @@ class LiveGuideCompanion {
       this.bubbleEl.classList.remove('bubble-pop');
       void this.bubbleEl.offsetWidth;
       this.bubbleEl.classList.add('bubble-pop');
+    }
+
+    if (this.container && this.container.classList.contains('guide-mobile-minimized')) {
+      this.container.classList.add('guide-mobile-bubble-peek');
+      clearTimeout(this.mobilePeekTimer);
+      this.mobilePeekTimer = setTimeout(() => {
+        if (this.container) this.container.classList.remove('guide-mobile-bubble-peek');
+      }, 3200);
     }
   }
 
