@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
+    <!-- Top Mobile Reading Progress Bar (iOS / Android Native Fluid Micro HUD) -->
+    <div id="mobile-progress-bar" class="mobile-progress-bar" aria-hidden="true"></div>
+
     <!-- Sound Toggle Button (Floating Bottom-Right) -->
     <button id="btn-sound-toggle" class="sound-toggle-btn" aria-label="Toggle sound effects" title="Audio chime">
       <svg id="sound-icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -558,12 +561,13 @@
         </div>
       </div>
 
-      <!-- 4 Vertical Snap Stations for Natural Mobile & PC Vertical Scrolling -->
+      <!-- 5 Vertical Snap Stations for Natural Mobile & PC Vertical Scrolling & Dwell Runway -->
       <div class="experience-snap-stations" aria-hidden="true">
         <div class="experience-snap-station" id="station-school10" data-index="0"></div>
         <div class="experience-snap-station" id="station-school12" data-index="1"></div>
         <div class="experience-snap-station" id="station-chitkara" data-index="2"></div>
         <div class="experience-snap-station" id="station-studio" data-index="3"></div>
+        <div class="experience-snap-station" id="station-studio-dwell" data-index="3"></div>
       </div>
     </section>
 
@@ -1128,6 +1132,7 @@
     <div id="resume-modal" class="swiss-modal" aria-hidden="true" role="dialog" aria-labelledby="resume-title">
       <div class="swiss-modal-backdrop" id="resume-backdrop"></div>
       <div class="swiss-modal-dialog">
+        <div class="sheet-drag-handle" aria-hidden="true"></div>
         <header class="modal-header">
           <div>
             <span class="modal-kicker">Software Developer Dossier</span>
@@ -1206,6 +1211,7 @@
     <div id="project-modal" class="swiss-modal" aria-hidden="true" role="dialog">
       <div class="swiss-modal-backdrop" id="project-backdrop"></div>
       <div class="swiss-modal-dialog">
+        <div class="sheet-drag-handle" aria-hidden="true"></div>
         <header class="modal-header">
           <div>
             <span class="modal-kicker" id="project-modal-kicker">Case Study</span>

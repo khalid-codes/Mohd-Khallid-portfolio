@@ -90,6 +90,19 @@ export function setSoundEnabled(enabled) {
 }
 
 /**
+ * TACTILE MOBILE HAPTICS UTILITY
+ * Safely triggers micro-vibrations on touch devices with vibration hardware support.
+ * @param {number|number[]} pattern - Vibration duration in ms or pattern array
+ */
+export function triggerHaptic(pattern = 10) {
+  if (typeof window !== 'undefined' && 'navigator' in window && 'vibrate' in navigator) {
+    try {
+      navigator.vibrate(pattern);
+    } catch (e) {}
+  }
+}
+
+/**
  * 1. PAGE / STAGE TRANSITION WHOOSH
  * Silky air whoosh + low-end motion body when scrolling between portfolio sections.
  * @param {'down'|'up'} direction - Scroll direction
@@ -167,6 +180,7 @@ export function playStageWhoosh(direction = 'down', isCrossScreen = false) {
  * @param {number} milestoneIdx - 0 to 3
  */
 export function playMilestoneSound(milestoneIdx = 0) {
+  triggerHaptic(8);
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -250,6 +264,7 @@ export function playBubblePop() {
  * Crisp, snappy tactile micro-tap for buttons, social cards, skill pills, and filter tabs.
  */
 export function playClickSound() {
+  triggerHaptic(10);
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -276,6 +291,7 @@ export function playClickSound() {
  * Distinct two-note ascending/descending glassy chord for opening/closing modals.
  */
 export function playModalOpenSound() {
+  triggerHaptic(12);
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -300,6 +316,7 @@ export function playModalOpenSound() {
 }
 
 export function playModalCloseSound() {
+  triggerHaptic(8);
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -324,6 +341,7 @@ export function playModalCloseSound() {
  * Playful kinetic spin whistle + bright celebration arpeggio.
  */
 export function playTrickSound() {
+  triggerHaptic([12, 30, 25]);
   const ctx = getAudioContext();
   if (!ctx) return;
 
@@ -366,6 +384,7 @@ export function playTrickSound() {
  * Crisp two-note confirmation ding (used for clipboard copy & enabling sound).
  */
 export function playSuccessSound() {
+  triggerHaptic([15, 40, 15]);
   const ctx = getAudioContext();
   if (!ctx) return;
 

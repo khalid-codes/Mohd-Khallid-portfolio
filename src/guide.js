@@ -72,6 +72,15 @@ const STAGE_SCRIPTS = [
   }
 ];
 
+function getStageSpeech(stageIdx) {
+  const script = STAGE_SCRIPTS[stageIdx];
+  if (!script) return '';
+  if (stageIdx === 0 && typeof window !== 'undefined' && window.innerWidth <= 640) {
+    return `Welcome! <span class="bubble-bold">Tap me</span> to interact, or scroll down to explore!`;
+  }
+  return script.speech;
+}
+
 class LiveGuideCompanion {
   constructor() {
     this.container = null;
@@ -118,6 +127,10 @@ class LiveGuideCompanion {
     // Create persistent live-guide container if not present
     let guide = document.getElementById('live-guide-companion');
     if (!guide) {
+      const initialSpeech = typeof window !== 'undefined' && window.innerWidth <= 640
+        ? `Welcome! <span class="bubble-bold">Tap me</span> to interact, or scroll down to explore!`
+        : `Welcome! <span class="bubble-bold">Click or drag</span> me to interact, or scroll down to explore my work!`;
+
       guide = document.createElement('aside');
       guide.id = 'live-guide-companion';
       guide.className = 'live-guide-companion guide-side-right';
@@ -125,7 +138,7 @@ class LiveGuideCompanion {
       guide.innerHTML = `
         <div id="live-guide-bubble" class="live-guide-bubble bubble-left">
           <div class="bubble-badge" id="live-guide-badge">👋 Guided Tour</div>
-          <p class="bubble-text" id="live-guide-text">Welcome! <span class="bubble-bold">Click or drag</span> me to interact, or scroll down to explore my work!</p>
+          <p class="bubble-text" id="live-guide-text">${initialSpeech}</p>
           <div class="bubble-pointer"></div>
         </div>
         
@@ -283,7 +296,7 @@ class LiveGuideCompanion {
         }
         if (this.speechEl && this.bubbleEl) {
           if (this.badgeEl) this.badgeEl.innerHTML = script.badge;
-          this.speechEl.innerHTML = script.speech;
+          this.speechEl.innerHTML = getStageSpeech(stageIdx);
           this.bubbleEl.classList.remove('bubble-walking-hide', 'bubble-pop');
           void this.bubbleEl.offsetWidth;
           this.bubbleEl.classList.add('bubble-pop');
@@ -317,7 +330,7 @@ class LiveGuideCompanion {
         this.bubbleEl.classList.add('bubble-pop');
 
         if (this.badgeEl) this.badgeEl.innerHTML = script.badge;
-        this.speechEl.innerHTML = script.speech;
+        this.speechEl.innerHTML = getStageSpeech(stageIdx);
       }
     }
   }

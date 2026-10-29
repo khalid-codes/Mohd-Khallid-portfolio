@@ -560,6 +560,17 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', syncActiveStage, { passive: true });
   syncActiveStage(); // Synchronize on initial page load immediately
 
+  // Continuous Fluid Mobile Reading Progress Bar (Top 2.5px Native HUD)
+  const mobileProgressBar = document.getElementById('mobile-progress-bar');
+  function updateMobileProgress() {
+    if (!mobileProgressBar) return;
+    const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollTotal > 0 ? (window.scrollY / scrollTotal) * 100 : 0;
+    mobileProgressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+  }
+  window.addEventListener('scroll', updateMobileProgress, { passive: true });
+  updateMobileProgress();
+
   // Initialize Horizontal Scrollytelling Experience Stage Motion
   initHorizontalTimelineMotion();
 
@@ -871,13 +882,17 @@ function initHorizontalTimelineMotion() {
 
     if (expRect.top <= 10 && expRect.bottom >= windowH * 0.4) {
       const scrolled = Math.max(0, -expRect.top);
-      // Determine milestone strictly from physical scroll distance
+      // Determine milestone strictly from physical scroll distance with balanced pacing:
+      // Station 0 (Note 01: St. Thomas): 0 to 0.85H
+      // Station 1 (Note 02: St. John's): 0.85H to 1.80H
+      // Station 2 (Note 03: Chitkara):  1.80H to 2.75H
+      // Station 3 (Note 04: Studio):    2.75H to 4.00H (1.25H = ~1,065px reading & interaction dwell runway!)
       let station = 0;
-      if (scrolled >= windowH * 2.7) {
+      if (scrolled >= windowH * 2.75) {
         station = 3;
-      } else if (scrolled >= windowH * 1.7) {
+      } else if (scrolled >= windowH * 1.8) {
         station = 2;
-      } else if (scrolled >= windowH * 0.75) {
+      } else if (scrolled >= windowH * 0.85) {
         station = 1;
       }
 

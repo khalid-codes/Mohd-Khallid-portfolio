@@ -58,6 +58,10 @@ body {
   min-height: 100vh;
 }
 
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -70,6 +74,16 @@ button {
   font: inherit;
   cursor: pointer;
   color: inherit;
+}
+
+button:active,
+a.pill-btn:active,
+.timeline-card:active,
+.ship-card-btn:active,
+.social-pill-card:active,
+.nav-arrow-btn:active {
+  transform: scale(0.96);
+  transition: transform 0.08s ease;
 }
 
 img {
@@ -1803,6 +1817,10 @@ img {
   backdrop-filter: blur(8px);
 }
 
+.sheet-drag-handle {
+  display: none;
+}
+
 .swiss-modal-dialog {
   position: relative;
   z-index: 10;
@@ -1984,6 +2002,29 @@ img {
 @keyframes toastSlideUp {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   TOP MOBILE READING PROGRESS BAR (Fluid Micro HUD)
+   -------------------------------------------------------------------------- */
+.mobile-progress-bar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2.5px;
+  background: linear-gradient(90deg, #38bdf8 0%, #2261e9 50%, #a855f7 100%);
+  z-index: 10000;
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+@media (max-width: 900px) {
+  .mobile-progress-bar {
+    display: block;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -2600,15 +2641,15 @@ img {
    ========================================================================== */
 .stage-horizontal-timeline {
   position: relative !important;
-  height: 400svh !important;
-  min-height: 400svh !important;
+  height: 500svh !important;
+  min-height: 500svh !important;
   padding: 0 !important;
   overflow: visible !important;
-  scroll-snap-align: none !important; /* CRITICAL: Prevents snapping entire 400svh to top when entering from below */
+  scroll-snap-align: none !important; /* CRITICAL: Prevents snapping entire 500svh to top when entering from below */
   background: transparent !important;
 }
 
-/* Sticky Screen: Fixed to Viewport for 400svh vertical scroll duration */
+/* Sticky Screen: Fixed to Viewport for 500svh vertical scroll duration */
 .experience-sticky-viewport {
   position: sticky !important;
   top: 0 !important;
@@ -2626,11 +2667,11 @@ img {
   box-sizing: border-box;
 }
 
-/* 4 Vertical Snap Stations (100svh each in document flow) for Natural Vertical Scrolling */
+/* 5 Vertical Snap Stations (100svh each in document flow) for Natural Vertical Scrolling & Dwell Runway */
 .experience-snap-stations {
   position: relative !important;
   width: 100% !important;
-  height: 400svh !important;
+  height: 500svh !important;
   pointer-events: none !important;
   display: block !important;
 }
@@ -3716,17 +3757,47 @@ img {
   }
 
   .experience-sticky-viewport .stage-nav {
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.45rem 0.25rem !important;
+  }
+
+  .experience-sticky-viewport .stage-nav-actions {
+    display: flex !important;
+    align-items: center !important;
+    margin-left: auto !important;
+    gap: 0.4rem !important;
+    flex-shrink: 0 !important;
   }
 
   .timeline-laser-track {
     order: 3;
-    width: 100%;
-    max-width: 100%;
-    height: 36px;
-    margin: 0.15rem 0 0;
-    padding: 0 6px;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 44px !important;
+    margin: 1.25rem 0 0.25rem !important;
+    padding: 6px 12px 5px !important;
+    align-items: flex-start !important;
+    border-radius: 999px !important;
+  }
+
+  .laser-track-bg,
+  .laser-track-fill {
+    top: 12px !important;
+    left: 34px !important;
+    right: 34px !important;
+    max-width: calc(100% - 68px) !important;
+  }
+
+  .laser-station {
+    gap: 6px !important;
+    padding: 0 3px !important;
+  }
+
+  .station-label {
+    line-height: 1 !important;
   }
 
   .scroll-instruction-pill {
@@ -4394,7 +4465,7 @@ img {
   .stage {
     min-height: auto;
     height: auto;
-    padding: 2rem 1rem 2.5rem;
+    padding: 2rem 1rem clamp(5.5rem, 14svh, 7.5rem);
     gap: 1.25rem;
     justify-content: flex-start;
   }
@@ -4445,8 +4516,12 @@ img {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 6px;
+  }
+
+  .stage-project .nav-actions > a:last-child {
+    margin-left: auto;
   }
 
   #hero .nav-actions,
@@ -4458,6 +4533,7 @@ img {
   .nav-actions .pill-btn {
     padding: 5.5px 12px;
     font-size: 11.5px;
+    white-space: nowrap;
   }
 
   /* Hero Statement */
@@ -4471,35 +4547,144 @@ img {
     line-height: 0.96;
   }
 
-  /* Bio Section */
+  /* Bio Section on Mobile (Full Viewport Presence & Sleek Horizontal Swiss Bento Cards) */
+  #bio.stage {
+    min-height: 100svh !important;
+    padding: 1rem 1.15rem clamp(5rem, 13svh, 6.8rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+  }
+
+  #bio .stage-nav {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  #bio .stage-breadcrumb {
+    font-size: 10px !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+  }
+
+  #bio .pill-btn-dark-outline {
+    padding: 5px 11px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .bio-content-container {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    gap: 1.35rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .bio-statement-box {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.35rem !important;
+  }
+
   .bio-editorial-text {
-    font-size: clamp(1.38rem, 5.8vw, 1.9rem);
-    line-height: 1.28;
+    font-size: clamp(1.68rem, 6.8vw, 2.18rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.025em !important;
+    font-weight: 600 !important;
+    color: var(--color-ink) !important;
+    margin: 0 !important;
+  }
+
+  .bio-editorial-text em {
+    font-style: normal !important;
+    font-weight: 700 !important;
+    text-decoration: underline !important;
+    text-decoration-thickness: 3px !important;
+    text-underline-offset: 5px !important;
+    text-decoration-color: rgba(34, 97, 233, 0.45) !important;
   }
 
   .bio-metrics-strip {
-    margin-top: 1.1rem;
-    gap: 10px;
+    margin-top: 0 !important;
   }
 
   .bio-skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    width: 100% !important;
   }
 
   .skill-pill {
-    padding: 12px 12px;
-    min-height: 88px;
-    border-radius: 14px;
+    min-height: auto !important;
+    padding: 11px 14px !important;
+    border-radius: 14px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(11, 11, 12, 0.09) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.035) !important;
+    box-sizing: border-box !important;
+  }
+
+  .skill-pill-main {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .skill-pill-top {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+  }
+
+  .skill-kicker {
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: var(--stage-blue) !important;
+  }
+
+  .skill-status-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #10b981 !important;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6) !important;
   }
 
   .skill-pill-title {
-    font-size: 0.92rem;
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--color-ink) !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
   }
 
   .skill-pill-stack {
-    font-size: 10px;
-    line-height: 1.35;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: var(--color-muted) !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    flex-shrink: 0 !important;
   }
 
   /* ==========================================================================
@@ -4507,66 +4692,87 @@ img {
      Vertical scroll or touch-swipe slides horizontally Note 01 -> 02 -> 03 -> 04
      ========================================================================== */
   .experience-sticky-viewport {
-    padding: 0.65rem 0.8rem 0.75rem !important;
+    padding: 0.65rem 0.75rem 0.75rem !important;
     justify-content: space-between !important;
     gap: 0.35rem !important;
   }
 
   .experience-sticky-viewport .stage-nav {
-    gap: 0.35rem !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.45rem 0.25rem !important;
   }
 
   .experience-sticky-viewport .stage-breadcrumb {
-    font-size: 10.5px !important;
-    letter-spacing: 0.03em !important;
+    font-size: 9.2px !important;
+    letter-spacing: 0.02em !important;
+    white-space: nowrap !important;
   }
 
-  .experience-sticky-viewport .nav-actions {
+  .experience-sticky-viewport .stage-nav-actions {
+    display: flex !important;
+    align-items: center !important;
     width: auto !important;
     margin-left: auto !important;
     gap: 5px !important;
+    flex-shrink: 0 !important;
   }
 
   .experience-sticky-viewport .nav-arrow-btn {
-    width: 28px !important;
-    height: 28px !important;
-    font-size: 13px !important;
+    width: 27px !important;
+    height: 27px !important;
+    font-size: 12.5px !important;
   }
 
   .experience-sticky-viewport .pill-btn-white {
-    padding: 4.5px 11px !important;
-    font-size: 11px !important;
+    padding: 4.5px 9.5px !important;
+    font-size: 10.5px !important;
+    white-space: nowrap !important;
   }
 
   .timeline-laser-track {
-    height: 30px !important;
-    padding: 0 5px !important;
-    margin: 0.1rem 0 0 !important;
+    height: 44px !important;
+    padding: 6px 12px 5px !important;
+    margin: 1.35rem 0 0.35rem !important;
+    align-items: flex-start !important;
+    border-radius: 999px !important;
   }
 
   .laser-track-bg,
   .laser-track-fill {
-    top: 7px !important;
+    top: 12px !important;
+    left: 34px !important;
+    right: 34px !important;
+    max-width: calc(100% - 68px) !important;
   }
 
   .station-pulse {
-    width: 11px !important;
-    height: 11px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .laser-station {
     min-width: 40px !important;
-    padding: 1px 3px !important;
-    gap: 2px !important;
+    padding: 0 3px !important;
+    gap: 6px !important;
   }
 
   .station-label {
-    font-size: 8.5px !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
   }
 
   .horizontal-conveyor-viewport {
     padding: 0.2rem 0 !important;
+    margin-top: 0.45rem !important;
+    margin-bottom: 0.35rem !important;
+    display: flex !important;
     align-items: center !important;
+    overflow: hidden !important;
+    flex: 1 !important;
+    min-height: 0 !important;
   }
 
   .timeline-card {
@@ -4574,10 +4780,10 @@ img {
     max-width: calc(100vw - 1.6rem) !important;
     height: fit-content !important;
     align-self: center !important;
-    max-height: calc(100svh - 140px) !important;
-    padding: 0.85rem 0.9rem !important;
+    max-height: calc(100svh - 150px) !important;
+    padding: 0.72rem 0.82rem !important;
     border-radius: 16px !important;
-    gap: 0.38rem !important;
+    gap: 0.32rem !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
@@ -4598,8 +4804,8 @@ img {
     flex-direction: row !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 0.4rem 0.65rem !important;
-    margin: -0.85rem -0.9rem 0.15rem -0.9rem !important;
+    padding: 0.38rem 0.65rem !important;
+    margin: -0.72rem -0.82rem 0.15rem -0.82rem !important;
     gap: 6px !important;
     flex-wrap: nowrap !important;
   }
@@ -4695,12 +4901,12 @@ img {
 
   .card-ships-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 5px !important;
+    gap: 4px !important;
   }
 
   .ship-card-btn {
-    padding: 5px 7px !important;
-    gap: 5px !important;
+    padding: 4.5px 6.5px !important;
+    gap: 4.5px !important;
     border-radius: 7px !important;
   }
 
@@ -4719,8 +4925,8 @@ img {
   }
 
   .card-footer {
-    padding: 0.35rem 0.65rem !important;
-    margin: 0.15rem -0.9rem -0.85rem -0.9rem !important;
+    padding: 0.32rem 0.65rem !important;
+    margin: 0.12rem -0.82rem -0.72rem -0.82rem !important;
   }
 
   .card-status-text {
@@ -4732,23 +4938,50 @@ img {
   }
 
   .timeline-bottom-bar {
-    padding-top: 4px !important;
+    padding-top: 6px !important;
+    padding-bottom: 4px !important;
     padding-left: 48px !important;
-    padding-right: 58px !important;
-    min-height: 22px !important;
+    padding-right: 64px !important;
+    min-height: 24px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .timeline-step-indicator {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  .timeline-track-scrubber {
+    min-width: 48px !important;
+    max-width: 60px !important;
+    flex-shrink: 0 !important;
   }
 
   .active-step-num {
     font-size: 0.92rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
   }
 
   .total-steps {
     font-size: 0.68rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
   }
 
   .active-step-title {
     font-size: 0.68rem !important;
-    max-width: 44vw !important;
+    margin-left: 4px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
   }
 
   /* ==========================================================================
@@ -4815,7 +5048,7 @@ img {
      ========================================================================== */
   #skills.stage {
     padding-top: 1.5rem;
-    padding-bottom: 4.5rem;
+    padding-bottom: clamp(6.5rem, 16svh, 8.5rem);
     gap: 1rem;
   }
 
@@ -5033,11 +5266,36 @@ img {
     line-height: 1.34;
   }
 
-  /* Modals on Mobile */
+  /* Native Mobile Bottom Sheet Drawer */
+  .swiss-modal {
+    align-items: flex-end !important;
+  }
+
+  .sheet-drag-handle {
+    display: block !important;
+    width: 38px !important;
+    height: 4px !important;
+    border-radius: 999px !important;
+    background: rgba(11, 11, 12, 0.22) !important;
+    margin: 8px auto 2px auto !important;
+    flex-shrink: 0 !important;
+  }
+
   .swiss-modal-dialog {
-    width: 95%;
-    max-height: 88svh;
-    border-radius: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 84svh !important;
+    border-radius: 22px 22px 0 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    transform: translateY(100%) !important;
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
+    box-shadow: 0 -12px 45px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .swiss-modal.modal-active .swiss-modal-dialog {
+    transform: translateY(0) !important;
   }
 
   .modal-header {
